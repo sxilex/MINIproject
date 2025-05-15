@@ -17,6 +17,7 @@ app.get("/api/v1/status", (req: Request, res: Response) => {
   res.status(200).json({ message: "API running away" });
 });
 
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use("/api/v1/events", eventsRouters);
 app.use("/api/v1/authentication", authRouters);
 
