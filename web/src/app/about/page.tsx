@@ -6,7 +6,13 @@ export default function AboutPage() {
     <main className="flex min-h-screen flex-col">
       <section className="relative h-[40vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/70 z-10">
-          <Image src="" alt="about us" fill priority className="object-cover" />
+          <Image
+            src="/Bitmap2.jpg"
+            alt="about us"
+            fill
+            priority
+            className="object-cover"
+          />
         </div>
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -50,7 +56,7 @@ export default function AboutPage() {
             </div>
             <div className="w-full md:w-1/2 relative aspect-square rounded-lg overflow-hidden">
               <Image
-                src="/placeholder.svg?height=800&width=800"
+                src="/Bitmap2.jpg?height=800&width=800"
                 alt="Our team"
                 fill
                 className="object-cover"
@@ -94,26 +100,16 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-white mb-12 text-center">
             Meet Our Team
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
             {[
               {
-                name: "Alex Johnson",
+                name: "Jepzec a.k.a Naufal",
                 role: "Founder & CEO",
                 image: "/placeholder.svg?height=400&width=400",
               },
               {
-                name: "Sarah Williams",
+                name: "Sxilex a.k.a uus ",
                 role: "Head of Operations",
-                image: "/placeholder.svg?height=400&width=400",
-              },
-              {
-                name: "Michael Chen",
-                role: "Lead Developer",
-                image: "/placeholder.svg?height=400&width=400",
-              },
-              {
-                name: "Jessica Rodriguez",
-                role: "Marketing Director",
                 image: "/placeholder.svg?height=400&width=400",
               },
             ].map((member, index) => (

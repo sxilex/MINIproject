@@ -1,3 +1,5 @@
+import FeaturedConcerts from "@/components/featured-post";
+import FooterSection from "@/components/footer-section";
 import Image from "next/image";
 
 export default function HomePage() {
@@ -22,6 +24,8 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+      <FeaturedConcerts />
+      <FooterSection />
     </main>
   );
 }
