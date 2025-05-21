@@ -1,0 +1,23 @@
+{
+  "name": "mini-project",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npx turbo run build",
+    "check-types": "npx turbo run check-types",
+    "dev": "npx turbo run dev",
+    "lint": "npx turbo run lint",
+    "start": "npx turbo run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "packageManager": "npm@10.9.2",
+  "dependencies": {
+    "turbo": "^2.5.3"
+  }
+}
