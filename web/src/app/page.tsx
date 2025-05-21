@@ -1,5 +1,7 @@
 import FeaturedConcerts from "@/components/featured-post";
 import FooterSection from "@/components/footer-section";
+import Newsletter from "@/components/newsletter";
+import { News_Cycle } from "next/font/google";
 import Image from "next/image";
 
 export default function HomePage() {
@@ -25,6 +27,7 @@ export default function HomePage() {
         </div>
       </section>
       <FeaturedConcerts />
+      <Newsletter />
       <FooterSection />
     </main>
   );

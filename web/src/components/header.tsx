@@ -82,10 +82,14 @@ export default function Header() {
               {link.name}
             </Link>
           ))}
-        </nav>
-
-        <nav>
-          <ul></ul>
+          <div className="gap-3">
+            <button className=" text-white hover:text-white hover:bg-white/10">
+              <Link href="./auth/login"></Link>Sign In
+            </button>
+            <button className="bg-rose-600 hover:bg-rose-700">
+              Buy Tickets
+            </button>
+          </div>
         </nav>
       </div>
 
