@@ -10,13 +10,21 @@ const prisma = new PrismaClient();
 
 export async function register(req: Request, res: Response) {
   try {
-    const { email, username, password } = req.body;
+    const { firstname, lastname, email, username, password } = req.body;
 
     const salt = await bcrypt.genSalt(8);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    await prisma.users.createMany({
-      data: { username, email, password: hashedPassword },
+    await prisma.user.createMany({
+      data: {
+        firstname,
+        lastname,
+        username,
+        email,
+        password: hashedPassword,
+        referalCode:
+          firstname.slice(0, 4) + Math.random().toString(36).slice(0, 6),
+      },
     });
     res.status(201).json({ message: "Registered, Welcome" });
   } catch (error) {
@@ -28,7 +36,7 @@ export async function login(req: Request, res: Response) {
   try {
     const { username, email, password } = req.body;
 
-    const existingAccount = await prisma.users.findFirst({
+    const existingAccount = await prisma.user.findFirst({
       where: { OR: [{ username }, { email }] },
     });
 

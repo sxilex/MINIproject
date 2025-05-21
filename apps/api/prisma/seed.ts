@@ -44,30 +44,45 @@ const users = [
     email: "rahmat.hidayat92@gmail.com",
     password: "rahmat123",
     eventsId: null,
+    firstName: "Rahmat",
+    lastName: "Hidayat",
+    referralCode: "RAH3FZKQ",
   },
   {
     username: "fitri.novita",
     email: "fitrinovita@yahoo.com",
     password: "fitri456",
     eventsId: null,
+    firstName: "Fitri",
+    lastName: "Novita",
+    referralCode: "FIT8XZB2",
   },
   {
     username: "eko.santoso22",
     email: "eko.santoso22@outlook.com",
     password: "eko789",
     eventsId: null,
+    firstName: "Eko",
+    lastName: "Santoso",
+    referralCode: "EKOQ9MW1",
   },
   {
     username: "linda_mulyani",
     email: "linda.mulyani@gmail.com",
     password: "linda000",
     eventsId: null,
+    firstName: "Linda",
+    lastName: "Mulyani",
+    referralCode: "LIN7TCKD",
   },
   {
     username: "andre.yusuf",
     email: "andre.yusuf99@mail.com",
     password: "andre999",
     eventsId: null,
+    firstName: "Andre",
+    lastName: "Yusuf",
+    referralCode: "AND5RPL0",
   },
 ];
 
@@ -100,14 +115,14 @@ const reviews = [
 async function seeds() {
   try {
     await prisma.category.deleteMany();
-    await prisma.reviews.deleteMany();
-    await prisma.events.deleteMany();
-    await prisma.users.deleteMany();
+    await prisma.review.deleteMany();
+    await prisma.event.deleteMany();
+    await prisma.user.deleteMany();
 
     await prisma.category.createMany({ data: category });
-    await prisma.users.createMany({ data: users });
-    await prisma.events.createMany({ data: events });
-    await prisma.reviews.createMany({ data: reviews });
+    await prisma.user.createMany({ data: users });
+    await prisma.event.createMany({ data: events });
+    await prisma.review.createMany({ data: reviews });
 
     console.log(`SuckSeeded`);
     process.exit(0);

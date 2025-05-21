@@ -3,7 +3,7 @@ import {
   deleteAll,
   getAllEvents,
   getEventId,
-  createEvents,
+  createEvent,
 } from "../controllers/event-controller";
 import { authMiddleware, roleGuard } from "../middlewares/auth-middlewares";
 
@@ -13,7 +13,7 @@ router
   .route("/")
   .get(authMiddleware, getAllEvents)
   .delete(authMiddleware, roleGuard("ADMIN"), deleteAll)
-  .post(authMiddleware, roleGuard("ORGANIZER"), createEvents);
+  .post(authMiddleware, roleGuard("ORGANIZER"), createEvent);
 
 router.route("/:eventsId").get(getEventId);
 

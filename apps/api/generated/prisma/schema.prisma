@@ -17,26 +17,7 @@ datasource db {
 enum Role {
   ADMIN //the one who manage the website and everything in it
   ORGANIZER //the one who manage the events, allowed to make changes and delete their own events not other organizer's
-  PARTICIPANTS //the one who buy the tickets events, got cash(+points) for it
-}
-
-model Users {
-  id          String   @id @default(uuid())
-  username    String
-  email       String
-  password    String
-  referalCode String?
-  role        Role?    @default(PARTICIPANTS)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  EventOwn Events? @relation(fields: [eventsId], references: [id])
-  eventsId String? @unique
-  // i have to make this only work if the role is Organizer
-}
-
-model Points {
-  id String @id @default(uuid())
+  PARTICIPANTS //the one who buy the ticket events, got cash(+points) for it
 }
 
 enum Eventtype {
@@ -44,47 +25,124 @@ enum Eventtype {
   FREE
 }
 
-model Events {
-  id          String     @id @default(uuid())
+enum TicketCategory {
+  NORMAL
+  ABNORMAL
+  ANOMALY
+}
+
+enum TransactionStatus {
+  SUCCESS
+  PENDING
+  FAILED
+}
+
+model User {
+  id          String   @id @default(uuid())
+  firstname   String
+  lastname    String
+  username    String
+  email       String
+  password    String
+  referalCode String   @unique
+  role        Role?    @default(PARTICIPANTS)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // i have to make this only work if the role is Organizer
+  Transaction Transaction[]
+  Point       Point[]
+  Event       Event[]
+  Review      Review[]
+}
+
+model Point {
+  id        String   @id @default(uuid())
+  amount    Int
+  createdAt DateTime @default(now())
+  userId    String
+
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id          String    @id @default(uuid())
   title       String
   description String
   location    String
   quota       Int
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  type        Eventtype  @default(FREE)
-  category    category[]
-  Users       Users?
-  Reviews     Reviews?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  type        Eventtype @default(FREE)
+  userId      String
+
+  User          User            @relation(fields: [userId], references: [id])
+  Review        Review[]
+  Ticket        Ticket[]
+  Image         Image[]
+  CategoryEvent CategoryEvent[]
 }
 
-// Tambah Discount dan voucher untuk event
-model Tickets {
-  id       String @id @default(uuid())
-  price    Int
-  quantity Int
-  limit    Int //lupa cara agar per user ada kuota beli
+model Image {
+  id      String @id @default(uuid())
+  url     String
+  eventId String
+
+  Event Event @relation(fields: [eventId], references: [id])
+}
+
+// Tambah Discount dan voucher untuk event tambah enum tiket type
+model Ticket {
+  id              String         @id @default(uuid())
+  price           Float
+  quantity        Int
+  userTicketLimit Int //lupa cara agar per user ada kuota beli
+  eventId         String
+  ticketCategory  TicketCategory @default(NORMAL)
+
+  Event       Event         @relation(fields: [eventId], references: [id])
+  Transaction Transaction[]
 }
 
 // buat endpoint query untuk cek if prisma.findmany total max ticket/user - ticket-user
-model Reviews {
-  id       String  @id @default(uuid())
-  text     String
-  events   Events? @relation(fields: [eventsId], references: [id])
-  eventsId String? @unique
+model Review {
+  id      String @id @default(uuid())
+  text    String
+  eventId String
+  userId  String
+
+  Event Event @relation(fields: [eventId], references: [id])
+  User  User  @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
 }
 
 //one to many to user and one to many to events
 
 model Transaction {
-  id String @id @default(uuid())
-  // transaksi history beli.
+  id          String            @id @default(uuid())
+  userId      String
+  ticketId    String
+  status      TransactionStatus @default(PENDING)
+  createdAt   DateTime          @default(now())
+  totalPrice  Float
+  totalTicket Int
+
+  User   User   @relation(fields: [userId], references: [id])
+  Ticket Ticket @relation(fields: [ticketId], references: [id])
 }
 
-model category {
-  id   String @id @default(uuid())
-  name String
+model Category {
+  id            String          @id @default(uuid())
+  name          String
+  CategoryEvent CategoryEvent[]
+}
 
-  CategoriesConnection Events? @relation(fields: [eventsId], references: [id])
-  eventsId             String?
+model CategoryEvent {
+  id         String @id @default(uuid())
+  categoryId String
+  eventId    String
+
+  Category Category @relation(fields: [categoryId], references: [id])
+  Event    Event    @relation(fields: [eventId], references: [id])
 }
