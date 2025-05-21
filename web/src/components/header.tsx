@@ -41,7 +41,7 @@ export default function Header() {
         isVisible ? "translate-y-0" : "-translate-y-[72px]"
       }`}
     >
-      <div className="mx-auto w-full flex z-50 items-center max-w-[1100px] justify-between px-4 font-medium text-black ">
+      <div className="mx-auto w-full flex z-50 items-center max-w-[1100px] justify-between px-4 text-white font-bold">
         <button
           className="block md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -77,7 +77,7 @@ export default function Header() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-black/80 transition-colors hover:text-white"
+              className="text-sm font-medium text-white/80 transition-colors hover:text-red-500"
             >
               {link.name}
             </Link>
@@ -95,7 +95,7 @@ export default function Header() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-lg font-medium text-black/80 transition-colors hover:text-white"
+              className="text-lg font-medium text-white/80 transition-colors hover:text-red-500"
             >
               {link.name}
             </Link>

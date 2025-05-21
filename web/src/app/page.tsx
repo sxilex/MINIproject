@@ -1,14 +1,12 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col">
-      {/* Hero Section */}
       <section className="relative h-[80vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/60 z-10" />
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D?height=1080&width=1920"
           alt="Concert crowd"
           fill
           priority
@@ -22,18 +20,6 @@ export default function HomePage() {
             Discover and book tickets for the hottest concerts and music events
             happening around you.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-rose-600 hover:bg-rose-700">
-              Browse Events
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-white border-white hover:bg-white/10"
-            >
-              Learn More
-            </Button>
-          </div>
         </div>
       </section>
     </main>
