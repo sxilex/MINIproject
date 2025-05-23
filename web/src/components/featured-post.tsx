@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 
-export default function FeaturedConcerts() {
+export default function FeaturedPost() {
   const concerts = [
     {
       id: 1,

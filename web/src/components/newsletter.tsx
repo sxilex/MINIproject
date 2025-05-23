@@ -13,8 +13,8 @@ export default function Newsletter() {
 
   return (
     <section className="py-16 bg-zinc-900 mx-auto flex flex-col items-center justify-center text-center">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl font-bold text-white mb-4 space-y-4">
+      <div className="container mx-auto px-4 flex flex-col items-center justify-center text-center">
+        <div className="max-w-3xl font-bold text-white mb-4 space-y-4 justify-center items-center text-center">
           <h2 className="text-3xl font-bold text-white">
             {" "}
             Give us some feedback

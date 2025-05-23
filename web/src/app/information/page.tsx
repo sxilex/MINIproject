@@ -22,7 +22,7 @@ export default function InformationPage() {
         </div>
       </section>
       
-      <section></section>
+     
     </main>
   );
 }
