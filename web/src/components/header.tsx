@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 
+import Image from "next/image";
+
 import Link from "next/link";
 
 export default function Header() {
@@ -30,15 +32,19 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed z-50 w-full py-3 shadow-md backdrop-blur-2xl transition-transform duration-300 ${
+      className={`fixed z-50 w-full py-3 shadow-md bg-black transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-[72px]"
       }`}
     >
       <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between px-4 font-medium text-white">
-        <h1 className="text-lg font-semibold">
-          Jepzec.web
-          <Link href="#profile-section"></Link>
-        </h1>
+        <div className="flex overflow-hidden justify-between items-center  px-5 h-10">
+          <Link
+            href="/"
+            className="relative text-xl font-bold text-gray-900 w-36 h-36 md:block"
+          >
+            <Image src={"/logo-minpro-2.png"} alt="blog logo" fill />
+          </Link>
+        </div>
 
         <button
           className="block md:hidden"

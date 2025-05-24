@@ -10,12 +10,13 @@ export default function HeroPage() {
           alt="Concert crowd"
           fill
           priority
-          className="object-cover mt-10"
+          className="object-cover mt-16"
         />
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-start">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
             Live your <span className="text-rose-500">Life</span>
           </h1>
+
           <p className="text-xl md:text-2xl text-white/90 max-w-2xl mb-8">
             Discover and book tickets for the hottest concerts and music events
             happening around you.

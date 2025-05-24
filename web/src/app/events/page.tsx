@@ -1,6 +1,5 @@
 "use client";
 
-import next from "next";
 import Image from "next/image";
 import React, { useState, useEffect, useMemo } from "react";
 
@@ -10,7 +9,7 @@ export default function EventsPage() {
     name: string;
   };
 
-  const data: Item[] = Array.from({ length: 20 }, (_, index) => ({
+  const data: Item[] = Array.from({ length: 100 }, (_, index) => ({
     id: index + 1,
     name: `Item ${index + 1}`,
   }));

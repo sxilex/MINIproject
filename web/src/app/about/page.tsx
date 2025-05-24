@@ -3,11 +3,11 @@ import { Music, Users, Calendar, Award } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex  flex-col min-h-screen">
       <section className="relative h-[40vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/70 z-10">
           <Image
-            src="/Bitmap2.jpg"
+            src="/crowd-concert.jpg"
             alt="about us"
             fill
             priority

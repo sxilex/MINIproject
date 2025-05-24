@@ -1,5 +1,6 @@
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 export default function FeaturedConcerts() {
   return (
     <section className="py-16 bg-black text-white">
@@ -41,9 +42,12 @@ export default function FeaturedConcerts() {
               across 4 stages. Early bird tickets available now with special
               Anomaly packages.
             </p>
-            <button className="bg-rose-600 hover:bg-rose-700 mt-4 px-4 rounded-full">
+            <Link
+              href="https://www.purwadhika.com"
+              className="bg-rose-600 hover:bg-rose-700 mt-4 px-4 rounded-full"
+            >
               Get Tickets
-            </button>
+            </Link>
           </div>
         </div>
       </div>
