@@ -1,10 +1,18 @@
-import RegisterPage from "./auth/register/page";
+import FeaturedPost from "@/components/featured-post";
+import FeaturedConcerts from "@/components/featured-concert";
 
-export default function HomePage() {
+import Newsletter from "@/components/newsletter";
+import HeroPage from "@/components/home-page";
+import UpcomingEvents from "@/components/upcoming-event";
+
+export default function Home() {
   return (
     <main>
-      <h1>Uhh these are he stuff</h1>
-      <RegisterPage />
+      <HeroPage />
+      <FeaturedConcerts />
+      <FeaturedPost />
+      <UpcomingEvents />
+      <Newsletter />
     </main>
   );
 }
