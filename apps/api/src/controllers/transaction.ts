@@ -12,3 +12,7 @@ export async function transaction(req: Request, res: Response) {
     res.status(500).json({ message: "Error" });
   }
 }
+
+export async function points (req: Request,res: Response){
+  
+}
