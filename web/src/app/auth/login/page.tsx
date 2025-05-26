@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
@@ -65,7 +65,9 @@ export default function LoginPage() {
             />
           </div>
 
-          <button className="bg-black text-white" type="submit">Register</button>
+          <button className="bg-black text-white" type="submit">
+            Register
+          </button>
         </form>
       </div>
     </main>

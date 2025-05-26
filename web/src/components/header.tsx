@@ -96,7 +96,7 @@ export default function Header() {
           <ul className="flex gap-3">
             <li>
               <button className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full">
-                <Link href="#"></Link>Sign In
+                <Link href={"./auth/login/page.tsx"}></Link>Sign In
               </button>
             </li>
             <li>
