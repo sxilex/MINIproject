@@ -7,9 +7,11 @@ export default function EventsPage() {
   type Item = {
     id: number;
     name: string;
+    title: string;
+    
   };
 
-  const data: Item[] = Array.from({ length: 100 }, (_, index) => ({
+  const data: Item[] = Array.from({ length: 20 }, (_, index) => ({
     id: index + 1,
     name: `Item ${index + 1}`,
   }));

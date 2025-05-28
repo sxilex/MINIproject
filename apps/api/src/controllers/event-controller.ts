@@ -1,15 +1,27 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "../../generated/prisma/client.js";
 import fs from "fs/promises";
-import { connect } from "http2";
+
 import { EventRequestBody } from "../types/interfaces.js";
 
 const prisma = new PrismaClient();
 
 export async function getAllEvents(req: Request, res: Response) {
   try {
-    const events = await prisma.event.findMany();
-    res.status(200).json({ data: events });
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 3;
+    const skip = (+page - 1) * +limit;
+
+    const allEvents = await prisma.event.findMany();
+
+    const events = await prisma.event.findMany({
+      skip: skip,
+      take: +limit,
+    });
+
+    res
+      .status(200)
+      .json({ data: events, totalPages: Math.ceil(allEvents.length) / +limit });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to get all articles data" });

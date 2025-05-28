@@ -44,7 +44,7 @@ model User {
   username    String
   email       String
   password    String
-  referalCode String   @unique
+  referalcode String   @unique
   role        Role?    @default(PARTICIPANTS)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

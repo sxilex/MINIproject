@@ -11,7 +11,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(authMiddleware, getAllEvents)
+  .get(getAllEvents)
   .delete(authMiddleware, roleGuard("ADMIN"), deleteAll)
   .post(authMiddleware, roleGuard("ORGANIZER"), createEvent);
 

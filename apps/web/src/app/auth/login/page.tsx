@@ -56,6 +56,7 @@ export default function LoginPage() {
             <input
               type="password"
               id="password"
+              placeholder="type your password.."
               value={loginData.password}
               onChange={(e) =>
                 setLoginData((prev) => {
@@ -65,8 +66,11 @@ export default function LoginPage() {
             />
           </div>
 
-          <button className="bg-black text-white" type="submit">
-            Register
+          <button
+            className="rounded-2xl underline bg-black hover:bg-gray-800 text-white"
+            type="submit"
+          >
+            Login
           </button>
         </form>
       </div>

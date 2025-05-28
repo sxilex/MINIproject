@@ -19,5 +19,8 @@
   "packageManager": "npm@10.9.2",
   "dependencies": {
     "turbo": "^2.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.5"
   }
 }

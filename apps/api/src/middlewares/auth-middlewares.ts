@@ -1,9 +1,5 @@
-import dotenv from "dotenv";
-
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-
-dotenv.config();
 
 export function authMiddleware(
   req: Request,
@@ -16,7 +12,7 @@ export function authMiddleware(
     return;
   }
   const SECRET_CODE = process.env.SECRET_CODE;
-  if (!SECRET_CODE) throw new Error();
+  if (!SECRET_CODE) throw new Error("No secret provided");
 
   const payload = jwt.verify(accessToken, SECRET_CODE);
 
