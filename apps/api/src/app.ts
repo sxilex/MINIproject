@@ -8,7 +8,7 @@ import eventsRouters from "./routers/events-routers";
 import authRouters from "./routers/auth-routers";
 
 const app: Application = express();
-const PORT: number = 3012;
+const PORT: number = 2012;
 
 app.use(express.json());
 app.use(cookieParser());

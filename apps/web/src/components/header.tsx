@@ -95,14 +95,22 @@ export default function Header() {
         <nav className="hidden md:block">
           <ul className="flex gap-3">
             <li>
-              <button className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full">
-                <Link href={"./auth/login/page.tsx"}></Link>Sign In
-              </button>
+              <Link
+                className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full"
+                href="/auth/login"
+              >
+                {" "}
+                Sign In
+              </Link>
             </li>
             <li>
-              <button className=" text-white hover:text-white bg-rose-600 hover:bg-white/10 px-4 rounded-2xl">
-                <Link href="#"></Link>Register
-              </button>
+              <Link
+                className=" text-white hover:text-white bg-rose-600 hover:bg-white/10 px-4 rounded-2xl"
+                href="/auth/register"
+              >
+                {" "}
+                Register
+              </Link>
             </li>
           </ul>
         </nav>
@@ -110,7 +118,7 @@ export default function Header() {
 
       {isMenuOpen && (
         <div className="mt-3 px-4 md:hidden">
-          <nav className="px-4 py-3 text-center text-black">
+          <nav className="px-4 py-3 text-center text-white">
             <ul className="space-y-8">
               <li>
                 <Link href="/" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -139,16 +147,18 @@ export default function Header() {
                 </Link>
               </li>
 
-              <li className="flex justify-center gap-3 pt-2">
-                <Link className="relative block h-[30px] w-[30px]" href="#">
-                  <button className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full">
-                    <Link href="./auth/login"></Link>Sign In
-                  </button>
+              <li className="flex flex-cols items-center text-center justify-center gap-3 pt-2">
+                <Link
+                  className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full relative block h-[30px] w-[30px]"
+                  href="/auth/login"
+                >
+                  Sign In
                 </Link>
-                <Link className="relative block h-[30px] w-[30px]" href="#">
-                  <button className="bg-rose-600 hover:bg-rose-700 px-4 rounded-full">
-                    Buy Tickets
-                  </button>
+                <Link
+                  className="bg-rose-600 hover:bg-rose-700 px-4 rounded-full relative block h-[30px] w-[30px]"
+                  href="/auth/register"
+                >
+                  Register
                 </Link>
               </li>
             </ul>

@@ -43,46 +43,37 @@ const users = [
     username: "rahmat_hidayat",
     email: "rahmat.hidayat92@gmail.com",
     password: "rahmat123",
-    eventsId: null,
-    firstName: "Rahmat",
-    lastName: "Hidayat",
-    referralCode: "RAH3FZKQ",
+
+    firstname: "Rahmat",
+    lastname: "Hidayat",
+    referalcode: "RAH3FZKQ",
   },
   {
     username: "fitri.novita",
     email: "fitrinovita@yahoo.com",
     password: "fitri456",
-    eventsId: null,
-    firstName: "Fitri",
-    lastName: "Novita",
-    referralCode: "FIT8XZB2",
+
+    firstname: "Fitri",
+    lastname: "Novita",
+    referalcode: "FIT8XZB2",
   },
   {
     username: "eko.santoso22",
     email: "eko.santoso22@outlook.com",
     password: "eko789",
-    eventsId: null,
-    firstName: "Eko",
-    lastName: "Santoso",
-    referralCode: "EKOQ9MW1",
+
+    firstname: "Eko",
+    lastname: "Santoso",
+    referalcode: "EKOQ9MW1",
   },
   {
     username: "linda_mulyani",
     email: "linda.mulyani@gmail.com",
     password: "linda000",
-    eventsId: null,
-    firstName: "Linda",
-    lastName: "Mulyani",
-    referralCode: "LIN7TCKD",
-  },
-  {
-    username: "andre.yusuf",
-    email: "andre.yusuf99@mail.com",
-    password: "andre999",
-    eventsId: null,
-    firstName: "Andre",
-    lastName: "Yusuf",
-    referralCode: "AND5RPL0",
+
+    firstname: "Linda",
+    lastname: "Mulyani",
+    referalcode: "LIN7TCKD",
   },
 ];
 
@@ -96,19 +87,15 @@ const category = [
 const reviews = [
   {
     text: "Great event! Learned a lot from the keynote speakers and met some amazing people in the startup world.",
-    eventsId: null,
   },
   {
     text: "The yoga sessions were super relaxing, and the food was delicious. Would definitely come back next year.",
-    eventsId: null,
   },
   {
     text: "As a backend developer, I found the AI talks extremely relevant. Loved the casual vibe and networking sessions.",
-    eventsId: null,
   },
   {
     text: "Loved the vibe and the indie films. The riverside setup in Bandung was the perfect touch. Hope they host it again!",
-    eventsId: null,
   },
 ];
 
@@ -121,8 +108,24 @@ async function seeds() {
 
     await prisma.category.createMany({ data: category });
     await prisma.user.createMany({ data: users });
-    await prisma.event.createMany({ data: events });
-    await prisma.review.createMany({ data: reviews });
+
+    const userData = await prisma.user.findMany(); // Ambil semua user yang sudah dibuat. [{id: "1"}, {}, {}]
+    await prisma.event.createMany({
+      data: userData.map((user, index) => {
+        return { ...events[index], userId: user.id };
+      }),
+    });
+
+    const eventData = await prisma.event.findMany();
+    await prisma.review.createMany({
+      data: eventData.map((event, index) => {
+        return {
+          ...reviews[index],
+          eventId: event.id,
+          userId: userData[index].id,
+        };
+      }),
+    });
 
     console.log(`SuckSeeded`);
     process.exit(0);
