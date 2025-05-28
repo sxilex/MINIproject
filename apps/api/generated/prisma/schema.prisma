@@ -26,9 +26,9 @@ enum Eventtype {
 }
 
 enum TicketCategory {
-  NORMAL
-  ABNORMAL
-  ANOMALY
+  REGULAR
+  VIP
+  DIAMOND
 }
 
 enum TransactionStatus {
@@ -68,6 +68,7 @@ model Point {
 model Event {
   id          String    @id @default(uuid())
   title       String
+  image       String
   description String
   location    String
   quota       Int
@@ -98,7 +99,7 @@ model Ticket {
   quantity        Int
   userTicketLimit Int //lupa cara agar per user ada kuota beli
   eventId         String
-  ticketCategory  TicketCategory @default(NORMAL)
+  ticketCategory  TicketCategory @default(REGULAR)
 
   Event       Event         @relation(fields: [eventId], references: [id])
   Transaction Transaction[]

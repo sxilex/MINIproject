@@ -42,6 +42,7 @@ export async function createEvent(req: Request, res: Response): Promise<void> {
   try {
     const {
       title,
+      image,
       description,
       location,
       quota,
@@ -54,6 +55,7 @@ export async function createEvent(req: Request, res: Response): Promise<void> {
       await prisma.event.create({
         data: {
           title,
+          image,
           description,
           location,
           quota,
@@ -63,7 +65,7 @@ export async function createEvent(req: Request, res: Response): Promise<void> {
               price: ticket.price,
               quantity: ticket.quantity,
               userTicketLimit: ticket.userTicketLimit,
-              ticketCategory: ticket.ticketCategory || "NORMAL", // Default to 'NORMAL' if not provided
+              ticketCategory: ticket.ticketCategory || "REGULER", // Default to 'NORMAL' if not provided
             })),
           },
         },

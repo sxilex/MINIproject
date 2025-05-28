@@ -143,6 +143,7 @@ exports.Prisma.PointScalarFieldEnum = {
 exports.Prisma.EventScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  image: 'image',
   description: 'description',
   location: 'location',
   quota: 'quota',
@@ -221,9 +222,9 @@ exports.Eventtype = exports.$Enums.Eventtype = {
 };
 
 exports.TicketCategory = exports.$Enums.TicketCategory = {
-  NORMAL: 'NORMAL',
-  ABNORMAL: 'ABNORMAL',
-  ANOMALY: 'ANOMALY'
+  REGULAR: 'REGULAR',
+  VIP: 'VIP',
+  DIAMOND: 'DIAMOND'
 };
 
 exports.TransactionStatus = exports.$Enums.TransactionStatus = {

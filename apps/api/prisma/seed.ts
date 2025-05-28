@@ -11,6 +11,7 @@ const events = [
     location: "Jakarta Convention Center, Jakarta",
     quota: 500,
     type: Eventtype.PAID,
+    image: "null",
   },
   {
     title: "Bali Yoga Retreat & Wellness Week",
@@ -19,6 +20,7 @@ const events = [
     location: "Ubud, Bali",
     quota: 80,
     type: Eventtype.PAID,
+    image: "null",
   },
   {
     title: "Surabaya DevTalk 2025",
@@ -27,6 +29,7 @@ const events = [
     location: "Universitas Airlangga, Surabaya",
     quota: 200,
     type: Eventtype.PAID,
+    image: "null",
   },
   {
     title: "Bandung Indie Film Screening",
@@ -35,6 +38,7 @@ const events = [
     location: "Cikapundung River Spot, Bandung",
     quota: 300,
     type: Eventtype.FREE,
+    image: "null",
   },
 ];
 
