@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "../../generated/prisma";
+import { PrismaClient } from "../../generated/prisma/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Resend } from "resend";
@@ -22,19 +22,20 @@ export async function register(req: Request, res: Response) {
         username,
         email,
         password: hashedPassword,
-        referalCode:
+        referalcode:
           firstname.slice(0, 4) + Math.random().toString(36).slice(0, 6),
       },
     });
     res.status(201).json({ message: "Registered, Welcome" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "failed to register" });
   }
 }
 
 export async function login(req: Request, res: Response) {
   try {
-    const { username, email, password } = req.body;
+    const { firstname, lastname, username, email, password } = req.body;
 
     const existingAccount = await prisma.user.findFirst({
       where: { OR: [{ username }, { email }] },
@@ -60,6 +61,7 @@ export async function login(req: Request, res: Response) {
         username: existingAccount.username,
         email: existingAccount.email,
         role: existingAccount.role,
+        name: existingAccount.firstname + existingAccount.lastname,
       },
       "supersecretwow"
     );

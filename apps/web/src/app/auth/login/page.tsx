@@ -11,12 +11,15 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(loginData),
-        credentials: "include",
-      });
+      const res = await fetch(
+        "http://localhost:2012/api/v1/authentication/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(loginData),
+          credentials: "include",
+        }
+      );
 
       if (!res.ok) {
         throw new Error("Failed to login");
@@ -31,17 +34,20 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen grid place-items-center">
+    <main className="min-h-screen grid place-items-center bg-blue-300 text-black">
       <div>
         <h1 className="text-2xl font-bold text-center mb-5"></h1>
         <form className="grid gap-4" onSubmit={handleSubmit}>
           <div className="grid">
             {" "}
-            <label htmlFor="name">username</label>
+            <label htmlFor="name" className="text-center">
+              username
+            </label>
             <input
+              placeholder="type your username here.."
               type="text"
               id="name"
-              className="border-black"
+              className=" border-2 "
               value={loginData.username}
               onChange={(e) =>
                 setLoginData((prev) => {
@@ -52,10 +58,13 @@ export default function LoginPage() {
           </div>
 
           <div className="grid">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="text-center">
+              Password
+            </label>
             <input
               type="password"
               id="password"
+              className="border-2"
               placeholder="type your password.."
               value={loginData.password}
               onChange={(e) =>

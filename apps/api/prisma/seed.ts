@@ -3,15 +3,8 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
+
 const events = [
-  {
-    title: "Jakarta Startup Festival 2025",
-    description:
-      "An annual gathering of Indonesia's top startup founders, investors, and tech enthusiasts. Keynotes, pitch battles, and networking sessions.",
-    location: "Jakarta Convention Center, Jakarta",
-    quota: 500,
-    type: Eventtype.PAID,
-  },
   {
     title: "Bali Yoga Retreat & Wellness Week",
     description:
@@ -21,19 +14,91 @@ const events = [
     type: Eventtype.PAID,
   },
   {
-    title: "Surabaya DevTalk 2025",
+    title: "Digital Nomad Meetup",
     description:
-      "A free tech meetup for developers in East Java. Talks on AI, backend engineering, and cloud infrastructure.",
-    location: "Universitas Airlangga, Surabaya",
-    quota: 200,
+      "Connect with fellow digital nomads over coffee and coworking. Ideal for networking and sharing tips.",
+    location: "Canggu, Bali",
+    quota: 50,
+    type: Eventtype.FREE,
+  },
+  {
+    title: "Island Photography Workshop",
+    description:
+      "Hands-on workshop with a professional photographer exploring the scenic beauty of Bali.",
+    location: "Seminyak, Bali",
+    quota: 25,
     type: Eventtype.PAID,
   },
   {
-    title: "Bandung Indie Film Screening",
+    title: "Sustainable Living Seminar",
     description:
-      "An outdoor film night showcasing independent Indonesian filmmakers. Open to the public, with live music and food stalls.",
-    location: "Cikapundung River Spot, Bandung",
-    quota: 300,
+      "Educational seminar on sustainable practices, eco-living, and local environmental efforts.",
+    location: "Ubud, Bali",
+    quota: 100,
+    type: Eventtype.FREE,
+  },
+  {
+    title: "Balinese Cooking Class",
+    description:
+      "Learn to cook authentic Balinese dishes with a local chef. Includes a market tour.",
+    location: "Denpasar, Bali",
+    quota: 20,
+    type: Eventtype.PAID,
+  },
+  {
+    title: "Beach Cleanup Drive",
+    description:
+      "Join the community in preserving Bali’s beaches. All equipment provided.",
+    location: "Kuta Beach, Bali",
+    quota: 200,
+    type: Eventtype.FREE,
+  },
+  {
+    title: "Sunset Surf Session",
+    description:
+      "Group surf lesson and beach hangout with local instructors. All levels welcome.",
+    location: "Echo Beach, Bali",
+    quota: 40,
+    type: Eventtype.PAID,
+  },
+  {
+    title: "Mindfulness & Breathwork Circle",
+    description:
+      "Guided session to cultivate presence and inner calm through breath and awareness.",
+    location: "Ubud, Bali",
+    quota: 30,
+    type: Eventtype.FREE,
+  },
+  {
+    title: "Art & Expression Jam",
+    description:
+      "Creative space to paint, draw, write, or dance. Materials provided, just bring your energy.",
+    location: "Sanur, Bali",
+    quota: 60,
+    type: Eventtype.FREE,
+  },
+  {
+    title: "Tropical Mixology Class",
+    description:
+      "Craft signature tropical cocktails with a pro bartender. Includes tastings and recipes.",
+    location: "Seminyak, Bali",
+    quota: 18,
+    type: Eventtype.PAID,
+  },
+  {
+    title: "Jungle Trek Adventure",
+    description:
+      "Guided trek through Bali’s lush jungle trails with stops at hidden waterfalls.",
+    location: "Tegallalang, Bali",
+    quota: 35,
+    type: Eventtype.PAID,
+  },
+  {
+    title: "Healing Sound Bath Evening",
+    description:
+      "Relax with therapeutic sound vibrations in a calming, communal setting.",
+    location: "Ubud, Bali",
+    quota: 70,
     type: Eventtype.FREE,
   },
 ];
@@ -42,7 +107,7 @@ const users = [
   {
     username: "rahmat_hidayat",
     email: "rahmat.hidayat92@gmail.com",
-    password: "rahmat123",
+    password:"rahmat123",
 
     firstname: "Rahmat",
     lastname: "Hidayat",

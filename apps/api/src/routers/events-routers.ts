@@ -4,8 +4,8 @@ import {
   getAllEvents,
   getEventId,
   createEvent,
-} from "../controllers/event-controller";
-import { authMiddleware, roleGuard } from "../middlewares/auth-middlewares";
+} from "../controllers/event-controller.js";
+import { authMiddleware, roleGuard } from "../middlewares/auth-middlewares.js";
 
 const router = express.Router();
 

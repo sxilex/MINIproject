@@ -1,12 +1,13 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
+import { Router } from "lucide-react";
 
 interface JWTPayLoad {
   id: string;
   name: string;
   email: string;
-  role: "CUSTOMER" | "EVENT_ORGANIZER";
+  role: "PARTICIPANTS" | "ORGANIZER";
 }
 
 export async function middleware(req: NextRequest) {
@@ -31,11 +32,12 @@ export async function middleware(req: NextRequest) {
   console.log(payload);
 
   if (
-    (role === "CUSTOMER" && pathname.startsWith("/dashboard/customer")) ||
-    (role === "EVENT_ORGANIZER" &&
-      pathname.startsWith("/dashboard/event-organizer"))
+    (role === "PARTICIPANTS" && pathname.startsWith("/dashboard/customer")) ||
+    (role === "ORGANIZER" && pathname.startsWith("/dashboard/event-organizer"))
   ) {
     return NextResponse.next();
+  } else if (role === "PARTICIPANTS" && pathname.startsWith("/dashboard")) {
+    return;
   } else {
     return new NextResponse("Forbidden", { status: 403 });
   }

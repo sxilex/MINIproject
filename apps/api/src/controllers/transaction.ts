@@ -5,7 +5,7 @@ export async function transaction(req: Request, res: Response) {
   try {
     const userId = req.user.id;
   
-    await 
+    
 
   } catch (error) {
     console.error(error);

@@ -9,6 +9,27 @@ import Link from "next/link";
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    async function getCurrentUser() {
+      try {
+        const res = await fetch(
+          "http://localhost:2012/api/v1/users/current-user",
+          {
+            credentials: "include",
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setUserData(data.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getCurrentUser();
+  }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -92,28 +113,37 @@ export default function Header() {
           </ul>
         </nav>
 
-        <nav className="hidden md:block">
-          <ul className="flex gap-3">
-            <li>
-              <Link
-                className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full"
-                href="/auth/login"
-              >
-                {" "}
-                Sign In
-              </Link>
-            </li>
-            <li>
-              <Link
-                className=" text-white hover:text-white bg-rose-600 hover:bg-white/10 px-4 rounded-2xl"
-                href="/auth/register"
-              >
-                {" "}
-                Register
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        {userData ? (
+          <Link
+            href={`/dashboard/${userData.role === "PARTICIPANTS" ? "customer" : "event-organizer"}`}
+            className="font-bold"
+          >
+            {userData.name}
+          </Link>
+        ) : (
+          <nav className="hidden md:block">
+            <ul className="flex gap-3">
+              <li>
+                <Link
+                  className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full"
+                  href="/auth/login"
+                >
+                  {" "}
+                  Sign In
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className=" text-white hover:text-white bg-rose-600 hover:bg-white/10 px-4 rounded-2xl"
+                  href="/auth/register"
+                >
+                  {" "}
+                  Register
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        )}
       </div>
 
       {isMenuOpen && (
