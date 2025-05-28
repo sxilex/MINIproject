@@ -9,8 +9,8 @@ export default function EventWithPagination() {
   const pageParam = parseInt(searchParams.get("page") || "1");
   const limitParam = parseInt(searchParams.get("limit") || "2");
 
-  const [page, setPage] = useState(pageParam);
-  const [limit, setLimit] = useState(limitParam);
+  const [page] = useState(pageParam);
+  const [limit] = useState(limitParam);
   const [events, setEvents] = useState(null);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ export async function getAllEvents(req: Request, res: Response) {
 
     res
       .status(200)
-      .json({ data: events, totalPages: allEvents.length / +limit });
+      .json({ data: events, totalPages: Math.ceil(allEvents.length) / +limit });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to get all articles data" });
