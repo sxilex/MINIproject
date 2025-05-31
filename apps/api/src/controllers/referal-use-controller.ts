@@ -4,7 +4,7 @@ import { PrismaClient } from "../../generated/prisma";
 const prisma = new PrismaClient();
 
 export async function refInput(req: Request, res: Response) {
-  // check if when the referal code is filled with correct code from user.referalcode, then give the owner of the code 10k points and the user using the code 10%
+  // check if when the referral code is filled with correct code from user.referralcode, then give the owner of the code 10k points and the user using the code 10%
 
   const { referralcode } = req.body;
 
