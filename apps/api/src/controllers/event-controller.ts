@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "../../generated/prisma/client.js";
-import fs from "fs/promises";
-
+import { cloudinary } from "../config/cloudinary.js";
 import { EventRequestBody } from "../types/interfaces.js";
+import fs from "fs/promises";
 
 const prisma = new PrismaClient();
 
@@ -48,32 +48,49 @@ export async function createEvent(req: Request, res: Response): Promise<void> {
       type,
       tickets,
     }: EventRequestBody = req.body;
+
+    const files = req.files as { [key: string]: Express.Multer.File[] };
     const userId = req.user.id;
 
-    if (type === "PAID") {
-      await prisma.event.create({
-        data: {
-          title,
-          description,
-          location,
-          quota,
-          userId,
-          Ticket: {
-            create: tickets.map((ticket) => ({
-              price: ticket.price,
-              quantity: ticket.quantity,
-              userTicketLimit: ticket.userTicketLimit,
-              ticketCategory: ticket.ticketCategory || "NORMAL", // Default to 'NORMAL' if not provided
-            })),
-          },
-        },
-      });
-    } else {
-      await prisma.event.create({
-        data: { title, description, location, quota, userId },
-      });
+    const imageData: { url: string }[] = [];
+
+    for (const key in files) {
+      for (const el of files[key]) {
+        const result = await cloudinary.uploader.upload(el.path, {
+          folder: "event-images-storage",
+        });
+
+        if (key === "image") {
+          imageData.push({ url: result.secure_url });
+        }
+
+        await fs.unlink(el.path);
+      }
     }
-    res.status(201).json({ message: "Event Created!" });
+
+    const newEvent = await prisma.event.create({
+      data: {
+        title,
+        description,
+        location,
+        quota,
+        userId,
+        type,
+        Image: {
+          create: imageData,
+        },
+        Ticket: {
+          create: tickets.map((ticket) => ({
+            price: ticket.price,
+            quantity: ticket.quantity,
+            userTicketLimit: ticket.userTicketLimit,
+            ticketCategory: ticket.ticketCategory || "REGULAR",
+          })),
+        },
+      },
+    });
+
+    res.status(201).json({ message: "Event Created!", event: newEvent });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to create the Event" });

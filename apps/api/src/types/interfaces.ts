@@ -7,6 +7,7 @@ export interface TicketData {
 
 export interface EventRequestBody {
   title: string;
+  image: string;
   description: string;
   location: string;
   quota: number;
@@ -20,4 +21,4 @@ export interface ReviewData {
   userId: string;
 }
 
-export type TicketCategory = `NORMAL` | `ABNORMAL` | `ANOMALY`;
+export type TicketCategory = `REGULAR` | `VIP` | `DIAMOND`;

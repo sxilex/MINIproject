@@ -5,9 +5,11 @@ import React, { useState } from "react";
 export default function RegisterPage() {
   const [registerData, setRegisterData] = useState({
     username: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
-    role: "",
+    referralcode: "", //make it optional... hmm
   });
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,7 +27,14 @@ export default function RegisterPage() {
         throw new Error("failed to fetch data");
       }
 
-      setRegisterData({ email: "", username: "", password: "", role: "" });
+      setRegisterData({
+        email: "",
+        username: "",
+        firstname: "",
+        lastname: "",
+        password: "",
+        referralcode: "",
+      });
 
       alert("New User Created! Welcome");
     } catch (error) {
@@ -45,6 +54,34 @@ export default function RegisterPage() {
               type="text"
               id="userame"
               value={registerData.username}
+              onChange={(e) =>
+                setRegisterData((prev) => {
+                  return { ...prev, username: e.target.value };
+                })
+              }
+            />
+          </div>
+          <div className="grid">
+            <label htmlFor="userame">First Name</label>
+            <input
+              className="bg-slate-500 text-white border border-black"
+              type="text"
+              id="userame"
+              value={registerData.firstname}
+              onChange={(e) =>
+                setRegisterData((prev) => {
+                  return { ...prev, username: e.target.value };
+                })
+              }
+            />
+          </div>
+          <div className="grid">
+            <label htmlFor="userame">Last Name</label>
+            <input
+              className="bg-slate-500 text-white border border-black"
+              type="text"
+              id="userame"
+              value={registerData.lastname}
               onChange={(e) =>
                 setRegisterData((prev) => {
                   return { ...prev, username: e.target.value };
@@ -80,19 +117,16 @@ export default function RegisterPage() {
               }
             />
           </div>
-
-          <div>
-            <label htmlFor="role" className="block mb-2 text-sm font-medium ">
-              Select Role
-            </label>
+          <div className="grid">
+            <label htmlFor="password">Referral Code (optional)</label>
             <input
               className="bg-slate-500 text-white border border-black"
-              type="text"
-              id="role"
-              value={registerData.role}
+              type="password"
+              id="password"
+              value={registerData.referralcode}
               onChange={(e) =>
                 setRegisterData((prev) => {
-                  return { ...prev, role: e.target.value };
+                  return { ...prev, password: e.target.value };
                 })
               }
             />
