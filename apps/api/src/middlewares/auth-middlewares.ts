@@ -37,3 +37,23 @@ export function roleGuard(...roles: string[]) {
     res.status(403).json({ message: `Access Denied` });
   };
 }
+
+export function verifyToken(req: Request, res: Response, next: NextFunction) {
+  const accesToken = req.cookies.accessToken;
+
+  if (!accesToken) {
+    res.status(401).json({ message: "Token is required" });
+    return;
+  }
+
+  const payload = jwt.verify(accesToken, process.env.JWT_SECRET as string);
+
+  if (!payload) {
+    res.status(401).json({ message: "Token verification failed" });
+    return;
+  }
+
+  req.user = payload;
+
+  next();
+}

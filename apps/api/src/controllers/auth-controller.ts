@@ -15,7 +15,6 @@ export async function register(req: Request, res: Response) {
 
     let referredbyId: string | null = null;
 
-    // Check if the referral code exists (for any user role)
     if (referralcode && referralcode.trim() !== "") {
       const referrer = await prisma.user.findUnique({
         where: { referralcode },
@@ -24,7 +23,6 @@ export async function register(req: Request, res: Response) {
       if (referrer) {
         referredbyId = referrer.id;
 
-        // 1️⃣ Give the referrer 10,000 points, expires in 3 months
         await prisma.point.create({
           data: {
             userId: referrer.id,
@@ -35,7 +33,6 @@ export async function register(req: Request, res: Response) {
       }
     }
 
-    // 2️⃣ Create the new user
     const newUser = await prisma.user.create({
       data: {
         username,
@@ -49,7 +46,6 @@ export async function register(req: Request, res: Response) {
       },
     });
 
-    // 3️⃣ If referredbyId exists, give the new user a 10% discount coupon
     if (referredbyId) {
       await prisma.coupon.create({
         data: {
