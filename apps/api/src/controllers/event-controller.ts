@@ -8,15 +8,20 @@ const prisma = new PrismaClient();
 
 export async function getAllEvents(req: Request, res: Response) {
   try {
-    const page = req.query.page || 1;
-    const limit = req.query.limit || 3;
-    const skip = (+page - 1) * +limit;
+    const page = parseInt(req.query.page as string) || 2;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
 
-    const allEvents = await prisma.event.findMany();
+    const allEvents = await prisma.event.findMany({});
 
     const events = await prisma.event.findMany({
       skip: skip,
       take: +limit,
+      include: {
+        User: true,
+        Image: true,
+        Ticket: true,
+      },
     });
 
     res
@@ -63,7 +68,7 @@ export async function createEvent(req: Request, res: Response): Promise<void> {
               price: ticket.price,
               quantity: ticket.quantity,
               userTicketLimit: ticket.userTicketLimit,
-              ticketCategory: ticket.ticketCategory || "NORMAL", // Default to 'NORMAL' if not provided
+              ticketCategory: ticket.ticketCategory || "REGULAR", // Default to 'REGULAR' if not provided
             })),
           },
         },

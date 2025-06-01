@@ -15,9 +15,8 @@ datasource db {
 }
 
 enum Role {
-  ADMIN //the one who manage the website and everything in it
   ORGANIZER //the one who manage the events, allowed to make changes and delete their own events not other organizer's
-  PARTICIPANTS //the one who buy the ticket events, got cash(+points) for it
+  CUSTOMER //the one who buy the ticket events, got cash(+points) for it
 }
 
 enum Eventtype {
@@ -26,9 +25,9 @@ enum Eventtype {
 }
 
 enum TicketCategory {
-  NORMAL
-  ABNORMAL
-  ANOMALY
+  REGULAR
+  VIP
+  DIAMOND
 }
 
 enum TransactionStatus {
@@ -45,7 +44,7 @@ model User {
   email       String
   password    String
   referalcode String   @unique
-  role        Role?    @default(PARTICIPANTS)
+  role        Role?    @default(CUSTOMER)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -68,6 +67,7 @@ model Point {
 model Event {
   id          String    @id @default(uuid())
   title       String
+  // image       String //possibly deleted
   description String
   location    String
   quota       Int
@@ -98,7 +98,7 @@ model Ticket {
   quantity        Int
   userTicketLimit Int //lupa cara agar per user ada kuota beli
   eventId         String
-  ticketCategory  TicketCategory @default(NORMAL)
+  ticketCategory  TicketCategory @default(REGULAR)
 
   Event       Event         @relation(fields: [eventId], references: [id])
   Transaction Transaction[]

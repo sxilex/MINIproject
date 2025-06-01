@@ -23,7 +23,8 @@ export async function register(req: Request, res: Response) {
         email,
         password: hashedPassword,
         referalcode:
-          firstname.slice(0, 4) + Math.random().toString(36).slice(0, 6),
+          username.toUpperCase().slice(0, 4) +
+          Math.random().toString(36).slice(0, 6),
       },
     });
     res.status(201).json({ message: "Registered, Welcome" });
@@ -38,7 +39,7 @@ export async function login(req: Request, res: Response) {
     const { firstname, lastname, username, email, password } = req.body;
 
     const existingAccount = await prisma.user.findFirst({
-      where: { OR: [{ username }, { email }] },
+      where: { OR: [{ firstname }, { lastname }, { username }, { email }] },
     });
 
     if (!existingAccount) {
@@ -77,6 +78,7 @@ export async function login(req: Request, res: Response) {
 
 export async function logout(req: Request, res: Response) {
   try {
+    req.user = null;
     res
       .clearCookie("accessToken")
       .status(200)

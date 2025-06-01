@@ -49,7 +49,7 @@ export default function EventDetail({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:8000/api/v1/transactions", {
+    const res = await fetch("http://localhost:2012/api/v1/transactions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

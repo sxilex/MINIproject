@@ -210,9 +210,8 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 exports.Role = exports.$Enums.Role = {
-  ADMIN: 'ADMIN',
   ORGANIZER: 'ORGANIZER',
-  PARTICIPANTS: 'PARTICIPANTS'
+  CUSTOMER: 'CUSTOMER'
 };
 
 exports.Eventtype = exports.$Enums.Eventtype = {
@@ -221,9 +220,9 @@ exports.Eventtype = exports.$Enums.Eventtype = {
 };
 
 exports.TicketCategory = exports.$Enums.TicketCategory = {
-  NORMAL: 'NORMAL',
-  ABNORMAL: 'ABNORMAL',
-  ANOMALY: 'ANOMALY'
+  REGULAR: 'REGULAR',
+  VIP: 'VIP',
+  DIAMOND: 'DIAMOND'
 };
 
 exports.TransactionStatus = exports.$Enums.TransactionStatus = {

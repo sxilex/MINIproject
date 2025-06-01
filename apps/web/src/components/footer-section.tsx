@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube, Music } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import Image from "next/image";
 
 export default function SiteFooter() {
   return (
@@ -74,6 +76,22 @@ export default function SiteFooter() {
                 </Link>
               </li>
             </ul>
+          </div>
+          <div className="fixed bottom-4 right-4">
+            <a
+              href="https://wa.me/+628119112942"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-10 h-10"
+            >
+              <Image
+                src="/whatsapp-svgrepo-com.svg"
+                alt="WhatsApp"
+                width={50}
+                height={50}
+                className="rounded-full hover:scale-110 transition-transform duration-300"
+              />
+            </a>
           </div>
 
           <div>

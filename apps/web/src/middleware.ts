@@ -1,28 +1,36 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
-import { Router } from "lucide-react";
 
 interface JWTPayLoad {
   id: string;
   name: string;
   email: string;
-  role: "PARTICIPANTS" | "ORGANIZER";
+  role: "CUSTOMER" | "ORGANIZER";
 }
 
 export async function middleware(req: NextRequest) {
   const accessToken = req.cookies.get("accessToken")?.value;
   const pathname = req.nextUrl.pathname;
 
-  if (!accessToken && pathname !== "/auth/login") {
-    //kick to the login page
+  if (!accessToken) {
+    if (pathname === "/auth/login" || pathname === "/auth/register") {
+      return NextResponse.next();
+    }
     return NextResponse.redirect(`${req.nextUrl.origin}/auth/login`);
-  } else if (!accessToken && pathname === "/auth/login") {
-    return NextResponse.next();
   }
 
-  if (!accessToken)
-    return NextResponse.redirect(`${req.nextUrl.origin}/auth/login`);
+  // if (!accessToken && pathname !== "/auth/login") {
+  //   //kick to the login page
+  //   return NextResponse.redirect(`${req.nextUrl.origin}/auth/login`);
+  // } else if (!accessToken && pathname === "/auth/login") {
+  //   return NextResponse.next();
+  // } else if (!accessToken && pathname === "/auth/register") {
+  //   return NextResponse.next();
+  // }
+
+  // if (!accessToken)
+  //   return NextResponse.redirect(`${req.nextUrl.origin}/auth/login`);
 
   const { payload } = await jwtVerify<JWTPayLoad>(
     accessToken,
@@ -32,12 +40,10 @@ export async function middleware(req: NextRequest) {
   console.log(payload);
 
   if (
-    (role === "PARTICIPANTS" && pathname.startsWith("/dashboard/customer")) ||
+    (role === "CUSTOMER" && pathname.startsWith("/dashboard/customer")) ||
     (role === "ORGANIZER" && pathname.startsWith("/dashboard/event-organizer"))
   ) {
     return NextResponse.next();
-  } else if (role === "PARTICIPANTS" && pathname.startsWith("/dashboard")) {
-    return;
   } else {
     return new NextResponse("Forbidden", { status: 403 });
   }

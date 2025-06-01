@@ -1,25 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/contexts/user-context";
 
 export default function LoginPage() {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
+
+  const { setRefreshUser } = useContext(UserContext);
+
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     try {
-      const res = await fetch(
-        "http://localhost:2012/api/v1/authentication/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(loginData),
-          credentials: "include",
-        }
-      );
+      const res = await fetch("http://localhost:2012/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+        credentials: "include",
+      });
 
       if (!res.ok) {
         throw new Error("Failed to login");
@@ -27,6 +28,9 @@ export default function LoginPage() {
       alert("login success");
 
       setLoginData({ username: "", password: "" });
+      setRefreshUser((prev: number) => {
+        return prev + 1;
+      });
       router.push("/");
     } catch (error) {
       console.error(error);
@@ -34,50 +38,52 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen grid place-items-center bg-blue-300 text-black">
-      <div>
-        <h1 className="text-2xl font-bold text-center mb-5"></h1>
-        <form className="grid gap-4" onSubmit={handleSubmit}>
-          <div className="grid">
-            {" "}
-            <label htmlFor="name" className="text-center">
-              username
+    <main className="min-h-screen flex items-center justify-center bg-gray-950">
+      <div className="bg-black border-2 border-white p-8 rounded-2xl shadow-md w-full max-w-sm">
+        <h1 className="text-2xl font-semibold text-center text-white mb-6">
+          Login
+        </h1>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name" className="block text-sm text-white mb-1">
+              Username
             </label>
             <input
-              placeholder="type your username here.."
               type="text"
+              required
               id="name"
-              className=" border-2 "
+              placeholder="Enter your username"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
               value={loginData.username}
               onChange={(e) =>
-                setLoginData((prev) => {
-                  return { ...prev, username: e.target.value };
-                })
+                setLoginData((prev) => ({
+                  ...prev,
+                  username: e.target.value,
+                }))
               }
             />
           </div>
-
-          <div className="grid">
-            <label htmlFor="password" className="text-center">
+          <div>
+            <label htmlFor="password" className="block text-sm text-white mb-1">
               Password
             </label>
             <input
               type="password"
               id="password"
-              className="border-2"
-              placeholder="type your password.."
+              placeholder="Enter your password"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
               value={loginData.password}
               onChange={(e) =>
-                setLoginData((prev) => {
-                  return { ...prev, password: e.target.value };
-                })
+                setLoginData((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
               }
             />
           </div>
-
           <button
-            className="rounded-2xl underline bg-black hover:bg-gray-800 text-white"
             type="submit"
+            className="w-full py-2 px-4 bg-gray-600 hover:bg-red-700 text-white rounded-md transition duration-200"
           >
             Login
           </button>

@@ -107,7 +107,7 @@ const users = [
   {
     username: "rahmat_hidayat",
     email: "rahmat.hidayat92@gmail.com",
-    password:"rahmat123",
+    password: "rahmat123",
 
     firstname: "Rahmat",
     lastname: "Hidayat",
@@ -140,6 +140,70 @@ const users = [
     lastname: "Mulyani",
     referalcode: "LIN7TCKD",
   },
+  {
+    username: "john_doe91",
+    email: "john.doe91@gmail.com",
+    password: "john1234",
+    firstname: "John",
+    lastname: "Doe",
+    referalcode: "JOH9DKXE",
+  },
+  {
+    username: "sarah_lee88",
+    email: "sarah.lee88@yahoo.com",
+    password: "sarahlee88",
+    firstname: "Sarah",
+    lastname: "Lee",
+    referalcode: "SAR4MNZP",
+  },
+  {
+    username: "michael_chan22",
+    email: "michael.chan22@hotmail.com",
+    password: "mikechan22",
+    firstname: "Michael",
+    lastname: "Chan",
+    referalcode: "MIC2WTRQ",
+  },
+  {
+    username: "anna_budi",
+    email: "anna.budi@gmail.com",
+    password: "anna4567",
+    firstname: "Anna",
+    lastname: "Budi",
+    referalcode: "ANN6QRLP",
+  },
+  {
+    username: "reza_hakim",
+    email: "reza.hakim@outlook.com",
+    password: "reza1234",
+    firstname: "Reza",
+    lastname: "Hakim",
+    referalcode: "REZ7UYTN",
+  },
+  {
+    username: "nina_putri",
+    email: "nina.putri@gmail.com",
+    password: "nina9876",
+    firstname: "Nina",
+    lastname: "Putri",
+    referalcode: "NIN5TKLM",
+  },
+  {
+    username: "aditya_firmansyah",
+    email: "aditya.firmansyah@yahoo.com",
+    password: "aditya000",
+    firstname: "Aditya",
+    lastname: "Firmansyah",
+    referalcode: "ADI3XZVB",
+  },
+  {
+    username: "melisa_tan",
+    email: "melisa.tan@gmail.com",
+    password: "melisa789",
+    firstname: "Melisa",
+    lastname: "Tan",
+    referalcode: "MEL8BCDR",
+  },
 ];
 
 const category = [
@@ -162,6 +226,30 @@ const reviews = [
   {
     text: "Loved the vibe and the indie films. The riverside setup in Bandung was the perfect touch. Hope they host it again!",
   },
+  {
+    text: "Such a magical night! The lights, the music, and the open-air cinema made it unforgettable.",
+  },
+  {
+    text: "First time attending an event like this and I'm hooked. Great selection of short films!",
+  },
+  {
+    text: "Bandung always surprises me. The venue was cozy and the atmosphere super chill.",
+  },
+  {
+    text: "I came for the films but stayed for the people and the food trucks. Amazing experience!",
+  },
+  {
+    text: "The indie films were so thought-provoking. Definitely felt like a creative haven.",
+  },
+  {
+    text: "Perfect date night. My partner and I loved every minute of it.",
+  },
+  {
+    text: "I wish there were more events like this. It felt like a little piece of a film festival paradise.",
+  },
+  {
+    text: "Great job to the organizers! Everything from the seating to the audio setup was spot on.",
+  },
 ];
 
 async function seeds() {
@@ -171,8 +259,25 @@ async function seeds() {
     await prisma.event.deleteMany();
     await prisma.user.deleteMany();
 
+    const usersWithHashedPasswords = await Promise.all(
+      users.map(async (user) => {
+        const salt = await bcrypt.genSalt(8);
+        const hashedPassword = await bcrypt.hash(user.password, salt);
+        return {
+          firstname: user.firstname,
+          username: user.username,
+          email: user.email,
+          password: hashedPassword,
+          lastname: user.lastname,
+          referalcode: user.referalcode,
+        };
+      })
+    );
+
     await prisma.category.createMany({ data: category });
-    await prisma.user.createMany({ data: users });
+    await prisma.user.createMany({
+      data: usersWithHashedPasswords,
+    });
 
     const userData = await prisma.user.findMany(); // Ambil semua user yang sudah dibuat. [{id: "1"}, {}, {}]
     await prisma.event.createMany({

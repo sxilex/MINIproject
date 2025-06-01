@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/navigation";
+import { UserContext } from "@/contexts/user-context";
 
 import Image from "next/image";
 
@@ -9,27 +11,8 @@ import Link from "next/link";
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    async function getCurrentUser() {
-      try {
-        const res = await fetch(
-          "http://localhost:2012/api/v1/users/current-user",
-          {
-            credentials: "include",
-          }
-        );
-        if (res.ok) {
-          const data = await res.json();
-          setUserData(data.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getCurrentUser();
-  }, []);
+  const { userData, setUserData } = useContext(UserContext);
+  const router = useRouter();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -51,6 +34,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", controlNavbar);
   }, []);
 
+  async function handleLogout() {
+    try {
+      await fetch("http://localhost:2012/api/v1/auth/logout", {
+        method: "DELETE",
+        credentials: "include",
+      });
+      setUserData(null);
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <header
       className={`fixed z-50 w-full py-3 shadow-md bg-black transition-transform duration-300 ${
@@ -102,7 +97,7 @@ export default function Header() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="./events">Events</Link>
+              <Link href="./event-with-pagination">Events</Link>
             </li>
             <li>
               <Link href="./information">Information</Link>
@@ -114,12 +109,16 @@ export default function Header() {
         </nav>
 
         {userData ? (
-          <Link
-            href={`/dashboard/${userData.role === "PARTICIPANTS" ? "customer" : "event-organizer"}`}
-            className="font-bold"
-          >
-            {userData.name}
-          </Link>
+          <div>
+            <p>Hello, </p>
+            <Link
+              href={`/dashboard/${userData.role === "CUSTOMER" ? "customer" : "event-organizer"}`}
+              className="font-bold"
+            >
+              {userData.name}
+            </Link>
+            <button onClick={handleLogout}> Log out</button>
+          </div>
         ) : (
           <nav className="hidden md:block">
             <ul className="flex gap-3">

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "../../generated/prisma";
+import { PrismaClient } from "../../generated/prisma/index.js";
 
 export async function transaction(req: Request, res: Response) {
   try {

@@ -12,7 +12,7 @@ const router = express.Router();
 router
   .route("/")
   .get(getAllEvents)
-  .delete(authMiddleware, roleGuard("ADMIN"), deleteAll)
+  .delete(authMiddleware, roleGuard("OGANIZER"), deleteAll)
   .post(authMiddleware, roleGuard("ORGANIZER"), createEvent);
 
 router.route("/:eventsId").get(getEventId);

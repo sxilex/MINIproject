@@ -64,9 +64,8 @@ export type CategoryEvent = $Result.DefaultSelection<Prisma.$CategoryEventPayloa
  */
 export namespace $Enums {
   export const Role: {
-  ADMIN: 'ADMIN',
   ORGANIZER: 'ORGANIZER',
-  PARTICIPANTS: 'PARTICIPANTS'
+  CUSTOMER: 'CUSTOMER'
 };
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -81,9 +80,9 @@ export type Eventtype = (typeof Eventtype)[keyof typeof Eventtype]
 
 
 export const TicketCategory: {
-  NORMAL: 'NORMAL',
-  ABNORMAL: 'ABNORMAL',
-  ANOMALY: 'ANOMALY'
+  REGULAR: 'REGULAR',
+  VIP: 'VIP',
+  DIAMOND: 'DIAMOND'
 };
 
 export type TicketCategory = (typeof TicketCategory)[keyof typeof TicketCategory]
