@@ -254,8 +254,15 @@ const reviews = [
 async function seeds() {
   try {
     await prisma.category.deleteMany();
+
     await prisma.review.deleteMany();
+
+    await prisma.coupon.deleteMany();
+
+    await prisma.point.deleteMany();
+
     await prisma.event.deleteMany();
+
     await prisma.user.deleteMany();
 
     const usersWithHashedPasswords = await Promise.all(

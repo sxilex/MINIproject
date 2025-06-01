@@ -23,7 +23,7 @@ export default function EventDetail({
         const eventId = (await params).eventId;
 
         const res = await fetch(
-          `http://localhost:8000/api/v1/events/${eventId}`
+          `http://localhost:2012/api/v1/events/${eventId}`
         );
         const data = await res.json();
 

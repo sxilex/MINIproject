@@ -1,7 +1,7 @@
 "use client";
 
-import { Router } from "lucide-react";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [registerData, setRegisterData] = useState({
@@ -10,8 +10,12 @@ export default function RegisterPage() {
     username: "",
     email: "",
     password: "",
-    referralcode: "", //make it optional... hmm
+    referralcode: "",
+    role: "", // don't forget to include this
   });
+
+  const router = useRouter();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -21,26 +25,26 @@ export default function RegisterPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(registerData),
       });
+
       if (!res.ok) {
-        throw new Error("failed to fetch data");
+        throw new Error("Failed to register");
       }
 
+      // Optional: reset form
       setRegisterData({
         firstname: "",
         lastname: "",
-
         username: "",
         email: "",
-
         password: "",
-
         referralcode: "",
+        role: "",
       });
 
-      alert("New User Created! Welcome");
-      
+      alert("New User Created! Redirecting to login...");
+      router.push("/auth/login"); // 👈 redirect to login page
     } catch (error) {
-      console.error(error);
+      console.error("Registration failed:", error);
     }
   }
 
@@ -155,7 +159,7 @@ export default function RegisterPage() {
               className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
             >
               <option value="">Select a role</option>
-              <option value="CUSTOMEr">Customer</option>
+              <option value="CUSTOMER">Customer</option>
               <option value="ORGANIZER">Organizer</option>
             </select>
           </div>

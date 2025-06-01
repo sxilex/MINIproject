@@ -144,7 +144,7 @@ export default function Header() {
               </li>
               <li>
                 <Link
-                  className=" text-white hover:text-white bg-rose-600 hover:bg-white/10 px-4 rounded-2xl"
+                  className=" text-white hover:text-white  hover:bg-rose-600 transition px-4 rounded-2xl"
                   href="/auth/register"
                 >
                   {" "}

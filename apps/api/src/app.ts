@@ -7,6 +7,8 @@ import cors from "cors";
 import userRouter from "./routers/user-router.js";
 import eventsRouters from "./routers/events-routers.js";
 import authRouters from "./routers/auth-routers.js";
+import referralRouter from "./routers/referral-use-router.js";
+import transactionRouter from "./routers/transaction-route.js";
 
 const app: Application = express();
 const PORT: number = 2012;
@@ -22,6 +24,8 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use("/api/v1/events", eventsRouters);
 app.use("/api/v1/auth", authRouters);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/referral", referralRouter);
+app.use("/api/v1/transacttion", transactionRouter);
 
 app.listen(PORT, () => {
   console.info(`server is running on http://localhost:${PORT}`);
