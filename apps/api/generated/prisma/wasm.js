@@ -127,7 +127,8 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
-  referalcode: 'referalcode',
+  referralcode: 'referralcode',
+  referredby: 'referredby',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -137,7 +138,15 @@ exports.Prisma.PointScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
   createdAt: 'createdAt',
+  expiredAt: 'expiredAt',
   userId: 'userId'
+};
+
+exports.Prisma.CouponScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  discount: 'discount',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.EventScalarFieldEnum = {
@@ -210,9 +219,8 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 exports.Role = exports.$Enums.Role = {
-  ADMIN: 'ADMIN',
   ORGANIZER: 'ORGANIZER',
-  PARTICIPANTS: 'PARTICIPANTS'
+  CUSTOMER: 'CUSTOMER'
 };
 
 exports.Eventtype = exports.$Enums.Eventtype = {
@@ -221,9 +229,9 @@ exports.Eventtype = exports.$Enums.Eventtype = {
 };
 
 exports.TicketCategory = exports.$Enums.TicketCategory = {
-  NORMAL: 'NORMAL',
-  ABNORMAL: 'ABNORMAL',
-  ANOMALY: 'ANOMALY'
+  REGULAR: 'REGULAR',
+  VIP: 'VIP',
+  DIAMOND: 'DIAMOND'
 };
 
 exports.TransactionStatus = exports.$Enums.TransactionStatus = {
@@ -235,6 +243,7 @@ exports.TransactionStatus = exports.$Enums.TransactionStatus = {
 exports.Prisma.ModelName = {
   User: 'User',
   Point: 'Point',
+  Coupon: 'Coupon',
   Event: 'Event',
   Image: 'Image',
   Ticket: 'Ticket',
