@@ -28,10 +28,8 @@ export async function createTransaction(req: Request, res: Response) {
     const ticketPrice = ticket.price;
     const totalPriceBeforeDiscount = ticketPrice * totalTicket;
 
-    // Apply point discount
     let pointsToUse = 0;
     if (pointUsed && pointUsed > 0) {
-      // Check if user has enough points
       const userPoints = await prisma.point.findMany({
         where: { userId, expiredAt: { gt: new Date() } },
       });
@@ -45,7 +43,6 @@ export async function createTransaction(req: Request, res: Response) {
         totalPriceBeforeDiscount
       );
       if (pointsToUse > 0) {
-        // Deduct points (simplified: just deduct from all points)
         let remaining = pointsToUse;
         for (const p of userPoints) {
           if (remaining === 0) break;
@@ -64,7 +61,6 @@ export async function createTransaction(req: Request, res: Response) {
     const orderId = uuid();
 
     await prisma.$transaction(async (tx) => {
-      // Create the transaction
       await tx.transaction.create({
         data: {
           id: orderId,
@@ -75,10 +71,9 @@ export async function createTransaction(req: Request, res: Response) {
         },
       });
 
-      // Update seat availability
       await tx.event.update({
         where: { id: ticket.eventId },
-        data: { seat: { decrement: totalTicket } },
+        data: { quota: { decrement: totalTicket } },
       });
     });
 
