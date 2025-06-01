@@ -102,7 +102,6 @@ model Image {
   Event Event @relation(fields: [eventId], references: [id])
 }
 
-// Tambah Discount dan voucher untuk event tambah enum tiket type
 model Ticket {
   id              String         @id @default(uuid())
   price           Float
