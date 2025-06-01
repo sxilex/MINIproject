@@ -77,7 +77,6 @@ export async function createTransaction(req: Request, res: Response) {
       });
     });
 
-    // Create a Midtrans transaction
     const midtransTransaction = await snap.createTransaction({
       transaction_details: {
         order_id: orderId,
