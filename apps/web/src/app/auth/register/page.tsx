@@ -1,5 +1,6 @@
 "use client";
 
+import { Router } from "lucide-react";
 import React, { useState } from "react";
 
 export default function RegisterPage() {
@@ -9,7 +10,7 @@ export default function RegisterPage() {
     username: "",
     email: "",
     password: "",
-    role: "",
+    referralcode: "", //make it optional... hmm
   });
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -27,13 +28,17 @@ export default function RegisterPage() {
       setRegisterData({
         firstname: "",
         lastname: "",
+
         username: "",
         email: "",
+
         password: "",
-        role: "",
+
+        referralcode: "",
       });
 
       alert("New User Created! Welcome");
+      
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +50,7 @@ export default function RegisterPage() {
         <h1 className="text-2xl font-bold text-center mb-6">Register</h1>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
+          <div className="grid">
             <label
               htmlFor="username"
               className="block mb-1 text-sm font-medium"
@@ -57,95 +62,83 @@ export default function RegisterPage() {
               type="text"
               value={registerData.username}
               onChange={(e) =>
-                setRegisterData((prev) => ({
-                  ...prev,
-                  username: e.target.value,
-                }))
+                setRegisterData((prev) => {
+                  return { ...prev, username: e.target.value };
+                })
               }
-              className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Enter your username"
+              className="bg-slate-500 text-white border border-black"
             />
           </div>
-
-          <div>
-            <label
-              htmlFor="username"
-              className="block mb-1 text-sm font-medium"
-            >
-              First name
-            </label>
+          <div className="grid">
+            <label htmlFor="firstname">First Name</label>
             <input
-              id="firstname"
+              className="bg-slate-500 text-white border border-black"
               type="text"
+              id="firstname"
               value={registerData.firstname}
               onChange={(e) =>
-                setRegisterData((prev) => ({
-                  ...prev,
-                  firstname: e.target.value,
-                }))
+                setRegisterData((prev) => {
+                  return { ...prev, firstname: e.target.value };
+                })
               }
-              className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Enter your username"
             />
           </div>
-
-          <div>
-            <label
-              htmlFor="username"
-              className="block mb-1 text-sm font-medium"
-            >
-              Last name
-            </label>
+          <div className="grid">
+            <label htmlFor="lastname">Last Name</label>
             <input
-              id="lastname"
+              className="bg-slate-500 text-white border border-black"
               type="text"
+              id="lastname"
               value={registerData.lastname}
               onChange={(e) =>
-                setRegisterData((prev) => ({
-                  ...prev,
-                  lastname: e.target.value,
-                }))
+                setRegisterData((prev) => {
+                  return { ...prev, lastname: e.target.value };
+                })
+              }
+            />
+          </div>
+          <div className="grid">
+            <label htmlFor="email">Email</label>
+            <input
+              className="bg-slate-500 text-white border border-black"
+              type="email"
+              id="email"
+              value={registerData.email}
+              onChange={(e) =>
+                setRegisterData((prev) => {
+                  return { ...prev, email: e.target.value };
+                })
+              }
+            />
+          </div>
+          <div className="grid">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={registerData.password}
+              onChange={(e) =>
+                setRegisterData((prev) => {
+                  return { ...prev, password: e.target.value };
+                })
               }
               className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
               placeholder="Enter your username"
             />
           </div>
-
-          <div>
-            <label htmlFor="email" className="block mb-1 text-sm font-medium">
-              Email
-            </label>
+          <div className="grid">
+            <label htmlFor="referralcode">Referral Code (optional)</label>
             <input
-              id="email"
-              type="email"
-              value={registerData.email}
+              type="referralcode"
+              id="referralcode"
+              value={registerData.referralcode}
               onChange={(e) =>
-                setRegisterData((prev) => ({ ...prev, email: e.target.value }))
+                setRegisterData((prev) => {
+                  return { ...prev, referralcode: e.target.value };
+                })
               }
               className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Enter your email"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block mb-1 text-sm font-medium"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={registerData.password}
-              onChange={(e) =>
-                setRegisterData((prev) => ({
-                  ...prev,
-                  password: e.target.value,
-                }))
-              }
-              className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Enter your password"
+              placeholder="Enter your username"
             />
           </div>
 
@@ -162,8 +155,8 @@ export default function RegisterPage() {
               className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
             >
               <option value="">Select a role</option>
-              <option value="PARTICIPANTS">PARTICIPANTS</option>
-              <option value="ORGANIZER">ORGANIZER</option>
+              <option value="CUSTOMEr">Customer</option>
+              <option value="ORGANIZER">Organizer</option>
             </select>
           </div>
 

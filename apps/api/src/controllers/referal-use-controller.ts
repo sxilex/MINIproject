@@ -1,16 +1,32 @@
 import { Request, Response } from "express";
-import { register } from "./auth-controller";
-import { PrismaClient } from "../../generated/prisma";
+import { PrismaClient } from "../../generated/prisma/index.js";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-export async function referalCode(req: Request, res: Response) {
+export async function refInput(req: Request, res: Response) {
   // check if when the referal code is filled with correct code from user.referalcode, then give the owner of the code 10k points and the user using the code 10%
-  const inputRefCode = req.body
 
+  const { referralcode } = req.body;
 
-  const refCode = await prisma.user.findUnique({where:{referalCode}})
+  let referredbyId: string | null = null;
 
-  if (inputRefCode === ){} 
+  if (referralcode && referralcode.trim() !== "") {
+    const referrer = await prisma.user.findUnique({
+      where: { referralcode },
+    });
 
+    if (referrer) {
+      referredbyId = referrer.id;
+
+      await prisma.point.create({
+        data: {
+          userId: referrer.id,
+          amount: 10_000,
+          expiredAt: new Date(new Date().setMonth(new Date().getMonth() + 3)),
+        },
+      });
+    }
+  }
 }
+
+export async function coupons(req: Request, res: Response) {}

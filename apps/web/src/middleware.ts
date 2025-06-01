@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest) {
 
   // if (!accessToken && pathname !== "/auth/login") {
   //   //kick to the login page
-  //   return NextResponse.redirect(`${req.nextUrl.origin}/auth/login`);
+  //   return NextResponse.redirect(${req.nextUrl.origin}/auth/login);
   // } else if (!accessToken && pathname === "/auth/login") {
   //   return NextResponse.next();
   // } else if (!accessToken && pathname === "/auth/register") {
@@ -30,7 +30,7 @@ export async function middleware(req: NextRequest) {
   // }
 
   // if (!accessToken)
-  //   return NextResponse.redirect(`${req.nextUrl.origin}/auth/login`);
+  //   return NextResponse.redirect(${req.nextUrl.origin}/auth/login);
 
   const { payload } = await jwtVerify<JWTPayLoad>(
     accessToken,
@@ -44,6 +44,8 @@ export async function middleware(req: NextRequest) {
     (role === "ORGANIZER" && pathname.startsWith("/dashboard/event-organizer"))
   ) {
     return NextResponse.next();
+  } else if (role === "CUSTOMER" && pathname.startsWith("/dashboard")) {
+    return;
   } else {
     return new NextResponse("Forbidden", { status: 403 });
   }

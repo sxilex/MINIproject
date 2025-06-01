@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-
 const events = [
   {
     title: "Bali Yoga Retreat & Wellness Week",
@@ -111,7 +110,7 @@ const users = [
 
     firstname: "Rahmat",
     lastname: "Hidayat",
-    referalcode: "RAH3FZKQ",
+    referralcode: "RAH3FZKQ",
   },
   {
     username: "fitri.novita",
@@ -120,7 +119,7 @@ const users = [
 
     firstname: "Fitri",
     lastname: "Novita",
-    referalcode: "FIT8XZB2",
+    referralcode: "FIT8XZB2",
   },
   {
     username: "eko.santoso22",
@@ -129,7 +128,7 @@ const users = [
 
     firstname: "Eko",
     lastname: "Santoso",
-    referalcode: "EKOQ9MW1",
+    referralcode: "EKOQ9MW1",
   },
   {
     username: "linda_mulyani",
@@ -138,7 +137,7 @@ const users = [
 
     firstname: "Linda",
     lastname: "Mulyani",
-    referalcode: "LIN7TCKD",
+    referralcode: "LIN7TCKD",
   },
   {
     username: "john_doe91",
@@ -146,7 +145,7 @@ const users = [
     password: "john1234",
     firstname: "John",
     lastname: "Doe",
-    referalcode: "JOH9DKXE",
+    referralcode: "JOH9DKXE",
   },
   {
     username: "sarah_lee88",
@@ -154,7 +153,7 @@ const users = [
     password: "sarahlee88",
     firstname: "Sarah",
     lastname: "Lee",
-    referalcode: "SAR4MNZP",
+    referralcode: "SAR4MNZP",
   },
   {
     username: "michael_chan22",
@@ -162,7 +161,7 @@ const users = [
     password: "mikechan22",
     firstname: "Michael",
     lastname: "Chan",
-    referalcode: "MIC2WTRQ",
+    referralcode: "MIC2WTRQ",
   },
   {
     username: "anna_budi",
@@ -170,7 +169,7 @@ const users = [
     password: "anna4567",
     firstname: "Anna",
     lastname: "Budi",
-    referalcode: "ANN6QRLP",
+    referralcode: "ANN6QRLP",
   },
   {
     username: "reza_hakim",
@@ -178,7 +177,7 @@ const users = [
     password: "reza1234",
     firstname: "Reza",
     lastname: "Hakim",
-    referalcode: "REZ7UYTN",
+    referralcode: "REZ7UYTN",
   },
   {
     username: "nina_putri",
@@ -186,7 +185,7 @@ const users = [
     password: "nina9876",
     firstname: "Nina",
     lastname: "Putri",
-    referalcode: "NIN5TKLM",
+    referralcode: "NIN5TKLM",
   },
   {
     username: "aditya_firmansyah",
@@ -194,7 +193,7 @@ const users = [
     password: "aditya000",
     firstname: "Aditya",
     lastname: "Firmansyah",
-    referalcode: "ADI3XZVB",
+    referralcode: "ADI3XZVB",
   },
   {
     username: "melisa_tan",
@@ -202,7 +201,7 @@ const users = [
     password: "melisa789",
     firstname: "Melisa",
     lastname: "Tan",
-    referalcode: "MEL8BCDR",
+    referralcode: "MEL8BCDR",
   },
 ];
 
@@ -269,7 +268,7 @@ async function seeds() {
           email: user.email,
           password: hashedPassword,
           lastname: user.lastname,
-          referalcode: user.referalcode,
+          referralcode: user.referralcode,
         };
       })
     );

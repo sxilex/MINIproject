@@ -37,37 +37,48 @@ enum TransactionStatus {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  firstname   String
-  lastname    String
-  username    String
-  email       String
-  password    String
-  referalcode String   @unique
-  role        Role?    @default(CUSTOMER)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(uuid())
+  firstname    String
+  lastname     String
+  username     String
+  email        String   @unique
+  password     String
+  referralcode String   @unique
+  referredby   String?
+  role         Role?    @default(CUSTOMER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   // i have to make this only work if the role is Organizer
   Transaction Transaction[]
   Point       Point[]
   Event       Event[]
   Review      Review[]
+  Coupon      Coupon[]
 }
 
 model Point {
   id        String   @id @default(uuid())
   amount    Int
   createdAt DateTime @default(now())
+  expiredAt DateTime
   userId    String
 
   User User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Coupon {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  discount  Int
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
 model Event {
   id          String    @id @default(uuid())
   title       String
-  // image       String //possibly deleted
+  //image     String 
   description String
   location    String
   quota       Int
@@ -91,7 +102,6 @@ model Image {
   Event Event @relation(fields: [eventId], references: [id])
 }
 
-// Tambah Discount dan voucher untuk event tambah enum tiket type
 model Ticket {
   id              String         @id @default(uuid())
   price           Float

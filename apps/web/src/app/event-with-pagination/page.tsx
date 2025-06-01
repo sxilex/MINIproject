@@ -54,20 +54,23 @@ export default function EventWithPagination() {
   //   console.log(totalPages);
 
   return (
-    <main className="pt-20  grid justify-center bg-gray-800">
+    <main className="pt-20  grid justify-center bg-black">
       <section className="min-h-screen grid place-items-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
           {events.map((event: EventType) => (
             <article
               key={event.id}
-              className="text-gray-800 border border-gray-200 rounded-2xl shadow-md bg-white w-full p-6 transition-transform hover:scale-[1.02] hover:shadow-xl"
+              className="bg-white rounded-xl shadow-md border border-gray-200 transition-transform hover:scale-[1.02] hover:shadow-xl p-6 space-y-3"
             >
-              <h2 className="text-lg font-semibold mb-2">{event.title}</h2>
+              <h2 className="text-xl font-semibold text-blue-700">
+                {event.title}
+              </h2>
+
               <Link
-                className="underline hover:text-zinc-500"
                 href={`/events/${event.id}`}
+                className="inline-block mt-4 text-blue-600 hover:underline text-sm"
               >
-                see more
+                View Details →
               </Link>
             </article>
           ))}

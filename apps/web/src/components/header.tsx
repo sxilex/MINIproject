@@ -58,7 +58,12 @@ export default function Header() {
             href="/"
             className="relative text-xl font-bold text-gray-900 w-36 h-36 md:block"
           >
-            <Image src={"/logo-minpro-2.png"} alt="blog logo" fill />
+            <Image
+              src={"/logo-minpro-2.png"}
+              alt="blog logo"
+              fill
+              className="bg-black"
+            />
           </Link>
         </div>
 
@@ -109,15 +114,21 @@ export default function Header() {
         </nav>
 
         {userData ? (
-          <div>
-            <p>Hello, </p>
+          <div className="grid grid-cols-3">
+            <p>Hi,</p>
             <Link
               href={`/dashboard/${userData.role === "CUSTOMER" ? "customer" : "event-organizer"}`}
               className="font-bold"
             >
               {userData.name}
             </Link>
-            <button onClick={handleLogout}> Log out</button>
+            <button
+              className="bg-black hover:bg-gray-800 transition px-2  rounded-2xl"
+              onClick={handleLogout}
+            >
+              {" "}
+              Log out
+            </button>
           </div>
         ) : (
           <nav className="hidden md:block">
