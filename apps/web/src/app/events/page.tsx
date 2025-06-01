@@ -8,7 +8,6 @@ export default function EventsPage() {
     id: number;
     name: string;
     title: string;
-    
   };
 
   const data: Item[] = Array.from({ length: 20 }, (_, index) => ({
@@ -43,7 +42,7 @@ export default function EventsPage() {
   return (
     <main className="flex min-h-screen flex-col">
       <section className="relative h-[40vh] w-full">
-        <div className="absoluter inset-0 bg-black/70 z-10">
+        <div className="absolute inset-0 bg-black/60 z-10">
           <Image
             src="/Bitmap.jpg"
             alt="event"

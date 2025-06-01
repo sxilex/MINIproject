@@ -4,15 +4,27 @@ import FeaturedConcerts from "@/components/featured-concert";
 import Newsletter from "@/components/newsletter";
 import HeroPage from "@/components/home-page";
 import UpcomingEvents from "@/components/upcoming-event";
+import EventWithPagination from "./event-with-pagination/page";
+import ClickSpark from "../../Reactbits/ClickSpark";
 
 export default function Home() {
   return (
     <main>
-      <HeroPage />
-      <FeaturedConcerts />
-      <FeaturedPost />
-      <UpcomingEvents />
-      <Newsletter />
+      <ClickSpark
+        sparkColor="#fff"
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
+      >
+        {/* Your content here */}
+        <HeroPage />
+        <FeaturedConcerts />
+        <EventWithPagination />
+        <FeaturedPost />
+        <UpcomingEvents />
+        <Newsletter />
+      </ClickSpark>
     </main>
   );
 }

@@ -1,90 +1,102 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [registerData, setRegisterData] = useState({
-    username: "",
     firstname: "",
     lastname: "",
+    username: "",
     email: "",
     password: "",
-    referralcode: "", //make it optional... hmm
+    referralcode: "",
+    role: "", // don't forget to include this
   });
+
+  const router = useRouter();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     try {
-      const res = await fetch(
-        "http://localhost:3012/api/v1/authentication/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(registerData),
-        }
-      );
-      if (!res.ok) {
-        throw new Error("failed to fetch data");
-      }
-
-      setRegisterData({
-        email: "",
-        username: "",
-        firstname: "",
-        lastname: "",
-        password: "",
-        referralcode: "",
+      const res = await fetch("http://localhost:2012/api/v1/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registerData),
       });
 
-      alert("New User Created! Welcome");
+      if (!res.ok) {
+        throw new Error("Failed to register");
+      }
+
+      // Optional: reset form
+      setRegisterData({
+        firstname: "",
+        lastname: "",
+        username: "",
+        email: "",
+        password: "",
+        referralcode: "",
+        role: "",
+      });
+
+      alert("New User Created! Redirecting to login...");
+      router.push("/auth/login"); // 👈 redirect to login page
     } catch (error) {
-      console.error(error);
+      console.error("Registration failed:", error);
     }
   }
 
   return (
-    <main className="min-h-screen grid place-items-center bg-stone-600 text-white">
-      <div>
-        <h1 className="place-items-center grid">REGISTER</h1>
-        <form className="grid gap-4" onSubmit={handleSubmit}>
+    <main className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+      <div className="py-10 bg-black borderbg-white border-2 p-8 rounded-2xl shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center mb-6">Register</h1>
+
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="grid">
-            <label htmlFor="userame">Username</label>
+            <label
+              htmlFor="username"
+              className="block mb-1 text-sm font-medium"
+            >
+              Username
+            </label>
             <input
-              className="bg-slate-500 text-white border border-black"
+              id="username"
               type="text"
-              id="userame"
               value={registerData.username}
               onChange={(e) =>
                 setRegisterData((prev) => {
                   return { ...prev, username: e.target.value };
                 })
               }
+              className="bg-slate-500 text-white border border-black"
             />
           </div>
           <div className="grid">
-            <label htmlFor="userame">First Name</label>
+            <label htmlFor="firstname">First Name</label>
             <input
               className="bg-slate-500 text-white border border-black"
               type="text"
-              id="userame"
+              id="firstname"
               value={registerData.firstname}
               onChange={(e) =>
                 setRegisterData((prev) => {
-                  return { ...prev, username: e.target.value };
+                  return { ...prev, firstname: e.target.value };
                 })
               }
             />
           </div>
           <div className="grid">
-            <label htmlFor="userame">Last Name</label>
+            <label htmlFor="lastname">Last Name</label>
             <input
               className="bg-slate-500 text-white border border-black"
               type="text"
-              id="userame"
+              id="lastname"
               value={registerData.lastname}
               onChange={(e) =>
                 setRegisterData((prev) => {
-                  return { ...prev, username: e.target.value };
+                  return { ...prev, lastname: e.target.value };
                 })
               }
             />
@@ -106,7 +118,6 @@ export default function RegisterPage() {
           <div className="grid">
             <label htmlFor="password">Password</label>
             <input
-              className="bg-slate-500 text-white border border-black"
               type="password"
               id="password"
               value={registerData.password}
@@ -115,26 +126,47 @@ export default function RegisterPage() {
                   return { ...prev, password: e.target.value };
                 })
               }
+              className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              placeholder="Enter your username"
             />
           </div>
           <div className="grid">
-            <label htmlFor="password">Referral Code (optional)</label>
+            <label htmlFor="referralcode">Referral Code (optional)</label>
             <input
-              className="bg-slate-500 text-white border border-black"
-              type="password"
-              id="password"
+              type="referralcode"
+              id="referralcode"
               value={registerData.referralcode}
               onChange={(e) =>
                 setRegisterData((prev) => {
-                  return { ...prev, password: e.target.value };
+                  return { ...prev, referralcode: e.target.value };
                 })
               }
+              className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              placeholder="Enter your username"
             />
           </div>
 
+          <div>
+            <label htmlFor="role" className="block mb-1 text-sm font-medium">
+              Role
+            </label>
+            <select
+              id="role"
+              value={registerData.role}
+              onChange={(e) =>
+                setRegisterData((prev) => ({ ...prev, role: e.target.value }))
+              }
+              className="w-full px-4 py-2 rounded-md bg-stone-600 border border-stone-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            >
+              <option value="">Select a role</option>
+              <option value="CUSTOMER">Customer</option>
+              <option value="ORGANIZER">Organizer</option>
+            </select>
+          </div>
+
           <button
-            className="bg-slate-600 text-white border border-black hover:bg-slate-700 hover:brightness-110"
             type="submit"
+            className="w-full py-2 mt-2 bg-yellow-500 text-stone-900 font-semibold rounded-md hover:bg-yellow-600 transition duration-200"
           >
             Confirm
           </button>

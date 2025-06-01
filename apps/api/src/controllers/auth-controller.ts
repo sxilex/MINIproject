@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "../../generated/prisma";
+import { PrismaClient } from "../../generated/prisma/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -62,7 +62,6 @@ export async function register(req: Request, res: Response) {
     res.status(500).json({ message: "Registration failed" });
   }
 }
-
 export async function login(req: Request, res: Response) {
   try {
     const { username, email, password } = req.body;

@@ -2,8 +2,8 @@ import express from "express";
 import {
   createTransaction,
   updateTransactionStatus,
-} from "../controllers/transaction";
-import { verifyToken } from "../middlewares/auth-middlewares";
+} from "../controllers/transaction.js";
+import { verifyToken } from "../middlewares/auth-middlewares.js";
 
 const router = express.Router();
 

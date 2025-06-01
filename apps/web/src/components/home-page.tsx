@@ -1,8 +1,10 @@
+
 import Image from "next/image";
 
 export default function HeroPage() {
   return (
     <section className="flex min-h-screen flex-col">
+      
       <div className="relative h-[80vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/60 z-10" />
         <Image

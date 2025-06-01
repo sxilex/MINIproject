@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/navigation";
+import { UserContext } from "@/contexts/user-context";
 
 import Image from "next/image";
 
@@ -9,6 +11,8 @@ import Link from "next/link";
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userData, setUserData } = useContext(UserContext);
+  const router = useRouter();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -30,6 +34,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", controlNavbar);
   }, []);
 
+  async function handleLogout() {
+    try {
+      await fetch("http://localhost:2012/api/v1/auth/logout", {
+        method: "DELETE",
+        credentials: "include",
+      });
+      setUserData(null);
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <header
       className={`fixed z-50 w-full py-3 shadow-md bg-black transition-transform duration-300 ${
@@ -42,7 +58,12 @@ export default function Header() {
             href="/"
             className="relative text-xl font-bold text-gray-900 w-36 h-36 md:block"
           >
-            <Image src={"/logo-minpro-2.png"} alt="blog logo" fill />
+            <Image
+              src={"/logo-minpro-2.png"}
+              alt="blog logo"
+              fill
+              className="bg-black"
+            />
           </Link>
         </div>
 
@@ -81,7 +102,7 @@ export default function Header() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="./events">Events</Link>
+              <Link href="./event-with-pagination">Events</Link>
             </li>
             <li>
               <Link href="./information">Information</Link>
@@ -92,28 +113,47 @@ export default function Header() {
           </ul>
         </nav>
 
-        <nav className="hidden md:block">
-          <ul className="flex gap-3">
-            <li>
-              <Link
-                className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full"
-                href="/auth/login"
-              >
-                {" "}
-                Sign In
-              </Link>
-            </li>
-            <li>
-              <Link
-                className=" text-white hover:text-white bg-rose-600 hover:bg-white/10 px-4 rounded-2xl"
-                href="/auth/register"
-              >
-                {" "}
-                Register
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        {userData ? (
+          <div className="grid grid-cols-3">
+            <p>Hi,</p>
+            <Link
+              href={`/dashboard/${userData.role === "CUSTOMER" ? "customer" : "event-organizer"}`}
+              className="font-bold"
+            >
+              {userData.name}
+            </Link>
+            <button
+              className="bg-black hover:bg-gray-800 transition px-2  rounded-2xl"
+              onClick={handleLogout}
+            >
+              {" "}
+              Log out
+            </button>
+          </div>
+        ) : (
+          <nav className="hidden md:block">
+            <ul className="flex gap-3">
+              <li>
+                <Link
+                  className=" text-white hover:text-white hover:bg-white/10 px-4 rounded-full"
+                  href="/auth/login"
+                >
+                  {" "}
+                  Sign In
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className=" text-white hover:text-white  hover:bg-rose-600 transition px-4 rounded-2xl"
+                  href="/auth/register"
+                >
+                  {" "}
+                  Register
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        )}
       </div>
 
       {isMenuOpen && (
