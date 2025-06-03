@@ -20,7 +20,7 @@ const events = [
       "Let smooth saxophones guide your soul at this midnight jazz experience.",
     location: "Nusa Dua Jazz Pavilion",
     quota: 130,
-    type: Eventtype.PAID,
+    type: Eventtype.FREE,
     startedDate: "2025-09-14T12:00:00Z",
     startedTime: "23:00",
   },
@@ -40,7 +40,7 @@ const events = [
       "Dive into the soul of reggae with island drums and a laid-back groove.",
     location: "Lovina Beachfront",
     quota: 220,
-    type: Eventtype.PAID,
+    type: Eventtype.FREE,
     startedDate: "2025-09-16T12:00:00Z",
     startedTime: "17:15",
   },
@@ -60,7 +60,7 @@ const events = [
       "An intimate sunset jazz session featuring live sax and cocktails.",
     location: "Tegalalang Rice Terrace Lounge",
     quota: 90,
-    type: Eventtype.PAID,
+    type: Eventtype.FREE,
     startedDate: "2025-09-18T12:00:00Z",
     startedTime: "18:15",
   },
@@ -80,7 +80,7 @@ const events = [
       "Feel the rhythm and let loose at this chill reggae gathering by the sea.",
     location: "Padang Padang Beach",
     quota: 200,
-    type: Eventtype.PAID,
+    type: Eventtype.FREE,
     startedDate: "2025-09-20T12:00:00Z",
     startedTime: "16:45",
   },
@@ -100,7 +100,7 @@ const events = [
       "A coastal jazz lounge night filled with breezy tunes and ocean views.",
     location: "Candidasa Seaside Venue",
     quota: 140,
-    type: Eventtype.PAID,
+    type: Eventtype.FREE,
     startedDate: "2025-09-22T12:00:00Z",
     startedTime: "20:30",
   },
@@ -120,7 +120,7 @@ const events = [
       "Feel-good reggae sounds from across the globe with tropical vibes.",
     location: "Amed Beach Stage",
     quota: 210,
-    type: Eventtype.PAID,
+    type: Eventtype.FREE,
     startedDate: "2025-09-24T12:00:00Z",
     startedTime: "17:00",
   },
@@ -272,6 +272,13 @@ const reviews = [
   },
   {
     text: "Great job to the organizers! Everything from the seating to the audio setup was spot on.",
+  },
+];
+
+const images = [
+  {
+    eventId: "",
+    url: "",
   },
 ];
 

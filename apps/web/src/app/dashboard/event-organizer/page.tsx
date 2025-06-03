@@ -6,6 +6,7 @@ import { Plus, Search, Trash2 } from "lucide-react";
 export interface Event {
   id: string;
   title: string;
+  
   description: string;
   date: string;
   time: string;

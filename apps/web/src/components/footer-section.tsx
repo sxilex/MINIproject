@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube, Music } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+
 import Image from "next/image";
 
 export default function SiteFooter() {
@@ -135,8 +135,22 @@ export default function SiteFooter() {
           <div>
             <h3 className="text-white font-medium mb-4">Contact</h3>
             <address className="not-italic space-y-2">
-              <p>666 Music Avenue</p>
-              <p>Hell City, MC 60606</p>
+              <p className="mt-4">
+                <a
+                  href="mailto:mnaufalkadisatria13@gmail.com"
+                  className="hover:text-white transition-colors"
+                >
+                  Raihan
+                </a>
+              </p>
+              <p className="mt-4">
+                <a
+                  href="tel:+628119112942"
+                  className="hover:text-white transition-colors"
+                >
+                  +62 777 888 99
+                </a>
+              </p>
               <p className="mt-4">
                 <a
                   href="mailto:mnaufalkadisatria13@gmail.com"

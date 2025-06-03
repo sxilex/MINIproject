@@ -102,13 +102,13 @@ export default function Header() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="./event-with-pagination">Events</Link>
+              <Link href="/events">Events</Link>
             </li>
             <li>
-              <Link href="./information">Information</Link>
+              <Link href="/information">Information</Link>
             </li>
             <li>
-              <Link href="./about">About</Link>
+              <Link href="/about">About</Link>
             </li>
           </ul>
         </nav>

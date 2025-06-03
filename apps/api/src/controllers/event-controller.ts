@@ -8,12 +8,24 @@ const prisma = new PrismaClient();
 export async function getAllEvents(req: Request, res: Response) {
   try {
     const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
+    const limit = parseInt(req.query.limit as string) || 3;
     const skip = (page - 1) * limit;
 
-    const allEvents = await prisma.event.findMany({});
+    const { title = "", type = "", location = "" } = req.query;
+
+    const filters: any = {
+      title: { contains: title, mode: "insensitive" },
+      location: { contains: location, mode: "insensitive" },
+    };
+
+    if (type) filters.type = type;
+    if (location)
+      filters.location = { contains: location, mode: "insensitive" };
+
+    const total = await prisma.event.count({ where: filters });
 
     const events = await prisma.event.findMany({
+      where: filters,
       skip: skip,
       take: +limit,
       include: {
@@ -25,7 +37,7 @@ export async function getAllEvents(req: Request, res: Response) {
 
     res
       .status(200)
-      .json({ data: events, totalPages: Math.ceil(allEvents.length) / +limit });
+      .json({ data: events, totalPages: Math.ceil(total / +limit) });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to get all articles data" });

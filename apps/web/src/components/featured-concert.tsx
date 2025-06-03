@@ -17,6 +17,7 @@ export default function FeaturedConcerts() {
               fill
               className="object-cover"
             />
+    
           </div>
           <div className="w-full md:w-1/2 space-y-6">
             {" "}

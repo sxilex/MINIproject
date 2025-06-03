@@ -1,36 +1,62 @@
+"use client";
 import Image from "next/image";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { format } from "date-fns";
+
+interface EventType {
+  id: string;
+  userId: string;
+  title: string;
+  location: string;
+  quota: number;
+  image: string;
+  startedDate: Date;
+  startedTime: string;
+  User: [{ firstname: string; lastname: string }];
+  Images: [{}];
+}
+
 export default function FeaturedPost() {
-  const concerts = [
-    {
-      id: 1,
-      title: "Electronic Music Festival",
-      date: "July 10, 2025",
-      time: "7:00 PM",
-      location: "Skyline Arena",
-      image: "/placeholder.svg?height=400&width=600",
-      price: "Rp 100.000",
-    },
-    {
-      id: 2,
-      title: "Jazz Night Live",
-      date: "August 5, 2025",
-      time: "8:30 PM",
-      location: "Blue Note Club",
-      image: "/placeholder.svg?height=400&width=600",
-      price: "Rp. 50.000,00",
-    },
-    {
-      id: 3,
-      title: "Classical Symphony",
-      date: "September 15, 2025",
-      time: "6:00 PM",
-      location: "Grand Concert Hall",
-      image: "/placeholder.svg?height=400&width=600",
-      price: "$60",
-    },
-  ];
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const pageParam = parseInt(searchParams.get("page") || "1");
+  const limitParam = parseInt(searchParams.get("limit") || "3");
+
+  const [page, setPage] = useState(pageParam);
+  const [limit, setLimit] = useState(limitParam);
+  const [events, setEvents] = useState<EventType[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const goToPage = (pageNumber: number) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setPage(pageNumber);
+
+      router.replace(`?page=${pageNumber}&limit=${limit}`, { scroll: false });
+    }
+  };
+
+  useEffect(() => {
+    async function getAllEvents() {
+      try {
+        const res = await fetch(
+          `http://localhost:2012/api/v1/events?page=${page}&limit=${limit}`
+        );
+        const data = await res.json();
+        setEvents(data.data);
+        setTotalPages(data.totalPages);
+        console.log(data);
+        console.log(data.data);
+      } catch (error) {
+        console.error("error fetching event", error);
+      }
+    }
+    getAllEvents();
+  }, [page, limit]);
 
   return (
     <section className="py-16 bg-zinc-900">
@@ -39,51 +65,59 @@ export default function FeaturedPost() {
           Featured Concerts
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {concerts.map((concert) => (
+          {events.map((event: EventType) => (
             <div
-              key={concert.id}
+              key={event.id}
               className="bg-zinc-800 rounded-lg overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1"
             >
               <div className="relative h-48 w-full">
                 <Image
-                  src={concert.image || "/placeholder.svg"}
-                  alt={concert.title}
+                  src={event.image || "/maintenance.jpg"}
+                  alt={event.title}
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-2">
-                  {concert.title}
+                  {event.title}
                 </h3>
                 <div className="space-y-2 mb-4 text-zinc-300">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="h-4 w-4 text-rose-500" />
-                    <span className="text-sm">{concert.date}</span>
+                    <span className="text-sm">
+                      {format(new Date(event.startedDate), "MMMM dd, yyyy")}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-rose-500" />
-                    <span className="text-sm">{concert.time}</span>
+                    <span className="text-sm">{event.startedTime}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-rose-500" />
-                    <span className="text-sm">{concert.location}</span>
+                    <span className="text-sm">{event.location}</span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-white font-bold">{concert.price}</span>
-                  <button className=" px-3 rounded-full bg-rose-600 hover:bg-rose-700 ">
-                    Buy Ticket
-                  </button>
+                  <span className="text-white font-bold">{event.price}</span>
+                  <Link
+                    href={`/events/${event.id}`}
+                    className=" px-3 rounded-full hover:underline"
+                  >
+                    View details →
+                  </Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
         <div className="mt-10 text-center">
-          <button className=" px-3 rounded-full text-white border-white hover:bg-white/10">
+          <Link
+            href="./events"
+            className=" px-3 rounded-full text-white border-white hover:bg-white/10"
+          >
             View All Concerts
-          </button>
+          </Link>
         </div>
       </div>
     </section>
