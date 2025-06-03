@@ -5,100 +5,124 @@ const prisma = new PrismaClient();
 
 const events = [
   {
-    title: "Bali Yoga Retreat & Wellness Week",
+    title: "Island Pop Fiesta",
     description:
-      "A serene yoga retreat designed to rejuvenate the mind and body. Includes meditation, healthy meals, and spa sessions.",
-    location: "Ubud, Bali",
-    quota: 80,
+      "A vibrant pop music bash featuring colorful performances and tropical cocktails.",
+    location: "Jimbaran Bay, Bali",
+    quota: 280,
     type: Eventtype.PAID,
+    startedDate: "2025-09-13T12:00:00Z",
+    startedTime: "18:00",
   },
   {
-    title: "Digital Nomad Meetup",
+    title: "Midnight Jazz Flow",
     description:
-      "Connect with fellow digital nomads over coffee and coworking. Ideal for networking and sharing tips.",
-    location: "Canggu, Bali",
-    quota: 50,
-    type: Eventtype.FREE,
-  },
-  {
-    title: "Island Photography Workshop",
-    description:
-      "Hands-on workshop with a professional photographer exploring the scenic beauty of Bali.",
-    location: "Seminyak, Bali",
-    quota: 25,
+      "Let smooth saxophones guide your soul at this midnight jazz experience.",
+    location: "Nusa Dua Jazz Pavilion",
+    quota: 130,
     type: Eventtype.PAID,
+    startedDate: "2025-09-14T12:00:00Z",
+    startedTime: "23:00",
   },
   {
-    title: "Sustainable Living Seminar",
+    title: "Lava Rock Explosion",
     description:
-      "Educational seminar on sustainable practices, eco-living, and local environmental efforts.",
-    location: "Ubud, Bali",
-    quota: 100,
-    type: Eventtype.FREE,
-  },
-  {
-    title: "Balinese Cooking Class",
-    description:
-      "Learn to cook authentic Balinese dishes with a local chef. Includes a market tour.",
-    location: "Denpasar, Bali",
-    quota: 20,
+      "A volcanic lineup of hard rock bands ready to shake the island.",
+    location: "Mount Batur Base Camp",
+    quota: 450,
     type: Eventtype.PAID,
+    startedDate: "2025-09-15T12:00:00Z",
+    startedTime: "19:45",
   },
   {
-    title: "Beach Cleanup Drive",
+    title: "Roots Reggae Night",
     description:
-      "Join the community in preserving Bali’s beaches. All equipment provided.",
-    location: "Kuta Beach, Bali",
+      "Dive into the soul of reggae with island drums and a laid-back groove.",
+    location: "Lovina Beachfront",
+    quota: 220,
+    type: Eventtype.PAID,
+    startedDate: "2025-09-16T12:00:00Z",
+    startedTime: "17:15",
+  },
+  {
+    title: "Pop Lights & Dance",
+    description:
+      "Dance into the night under neon lights with top pop performers.",
+    location: "Sky Garden Rooftop, Bali",
+    quota: 300,
+    type: Eventtype.PAID,
+    startedDate: "2025-09-17T12:00:00Z",
+    startedTime: "20:00",
+  },
+  {
+    title: "Sax & Sunset",
+    description:
+      "An intimate sunset jazz session featuring live sax and cocktails.",
+    location: "Tegalalang Rice Terrace Lounge",
+    quota: 90,
+    type: Eventtype.PAID,
+    startedDate: "2025-09-18T12:00:00Z",
+    startedTime: "18:15",
+  },
+  {
+    title: "Blazing Rock Arena",
+    description:
+      "Turn up the volume for a night of blazing riffs and stage pyrotechnics.",
+    location: "Bali Rock Dome",
+    quota: 480,
+    type: Eventtype.PAID,
+    startedDate: "2025-09-19T12:00:00Z",
+    startedTime: "21:30",
+  },
+  {
+    title: "Beach Reggae Chill",
+    description:
+      "Feel the rhythm and let loose at this chill reggae gathering by the sea.",
+    location: "Padang Padang Beach",
     quota: 200,
-    type: Eventtype.FREE,
-  },
-  {
-    title: "Sunset Surf Session",
-    description:
-      "Group surf lesson and beach hangout with local instructors. All levels welcome.",
-    location: "Echo Beach, Bali",
-    quota: 40,
     type: Eventtype.PAID,
+    startedDate: "2025-09-20T12:00:00Z",
+    startedTime: "16:45",
   },
   {
-    title: "Mindfulness & Breathwork Circle",
+    title: "Pop Dreams Live",
     description:
-      "Guided session to cultivate presence and inner calm through breath and awareness.",
-    location: "Ubud, Bali",
-    quota: 30,
-    type: Eventtype.FREE,
-  },
-  {
-    title: "Art & Expression Jam",
-    description:
-      "Creative space to paint, draw, write, or dance. Materials provided, just bring your energy.",
-    location: "Sanur, Bali",
-    quota: 60,
-    type: Eventtype.FREE,
-  },
-  {
-    title: "Tropical Mixology Class",
-    description:
-      "Craft signature tropical cocktails with a pro bartender. Includes tastings and recipes.",
-    location: "Seminyak, Bali",
-    quota: 18,
+      "Watch young pop stars light up the stage with stunning visuals and sound.",
+    location: "Bali Convention Center",
+    quota: 260,
     type: Eventtype.PAID,
+    startedDate: "2025-09-21T12:00:00Z",
+    startedTime: "19:00",
   },
   {
-    title: "Jungle Trek Adventure",
+    title: "Jazz Breeze Lounge",
     description:
-      "Guided trek through Bali’s lush jungle trails with stops at hidden waterfalls.",
-    location: "Tegallalang, Bali",
-    quota: 35,
+      "A coastal jazz lounge night filled with breezy tunes and ocean views.",
+    location: "Candidasa Seaside Venue",
+    quota: 140,
     type: Eventtype.PAID,
+    startedDate: "2025-09-22T12:00:00Z",
+    startedTime: "20:30",
   },
   {
-    title: "Healing Sound Bath Evening",
+    title: "Riff Revival: Rock Legacy",
     description:
-      "Relax with therapeutic sound vibrations in a calming, communal setting.",
-    location: "Ubud, Bali",
-    quota: 70,
-    type: Eventtype.FREE,
+      "Tributes to legendary rock bands in a night of classic energy.",
+    location: "Legian Sound Arena",
+    quota: 390,
+    type: Eventtype.PAID,
+    startedDate: "2025-09-23T12:00:00Z",
+    startedTime: "19:30",
+  },
+  {
+    title: "Island Reggae Grooves",
+    description:
+      "Feel-good reggae sounds from across the globe with tropical vibes.",
+    location: "Amed Beach Stage",
+    quota: 210,
+    type: Eventtype.PAID,
+    startedDate: "2025-09-24T12:00:00Z",
+    startedTime: "17:00",
   },
 ];
 
@@ -208,8 +232,8 @@ const users = [
 const category = [
   { name: "Jazz" },
   { name: "Rock" },
-  { name: "Reggie" },
-  { name: "Comedy" },
+  { name: "Reggae" },
+  { name: "Pop" },
 ];
 
 const reviews = [

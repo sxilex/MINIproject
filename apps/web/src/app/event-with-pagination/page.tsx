@@ -18,7 +18,7 @@ export default function EventWithPagination() {
   const router = useRouter();
 
   const pageParam = parseInt(searchParams.get("page") || "1");
-  const limitParam = parseInt(searchParams.get("limit") || "4");
+  const limitParam = parseInt(searchParams.get("limit") || "3");
 
   const [page, setPage] = useState(pageParam);
   const [limit, setLimit] = useState(limitParam);

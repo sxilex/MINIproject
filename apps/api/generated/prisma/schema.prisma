@@ -83,6 +83,8 @@ model Event {
   location    String
   quota       Int
   createdAt   DateTime  @default(now())
+  startedDate DateTime
+  startedTime String
   updatedAt   DateTime  @updatedAt
   type        Eventtype @default(FREE)
   userId      String
@@ -105,7 +107,7 @@ model Image {
 model Ticket {
   id              String         @id @default(uuid())
   price           Float
-  quantity        Int
+  quantity        Float
   userTicketLimit Int //lupa cara agar per user ada kuota beli
   eventId         String
   ticketCategory  TicketCategory @default(REGULAR)

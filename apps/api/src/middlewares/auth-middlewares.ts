@@ -22,20 +22,8 @@ export function authMiddleware(
   }
 
   req.user = payload;
-  console.log(req.user);
+
   next();
-}
-
-export function roleGuard(...roles: string[]) {
-  return async function (req: Request, res: Response, next: NextFunction) {
-    const user = req.user;
-
-    if (roles.includes(user.role)) {
-      next();
-      return;
-    }
-    res.status(403).json({ message: `Access Denied` });
-  };
 }
 
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
@@ -56,4 +44,16 @@ export function verifyToken(req: Request, res: Response, next: NextFunction) {
   req.user = payload;
 
   next();
+}
+
+export function roleGuard(...roles: string[]) {
+  return async function (req: Request, res: Response, next: NextFunction) {
+    const user = req.user;
+
+    if (roles.includes(user.role)) {
+      next();
+      return;
+    }
+    res.status(403).json({ message: `Access Denied` });
+  };
 }

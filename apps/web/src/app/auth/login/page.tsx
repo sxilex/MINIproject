@@ -53,7 +53,7 @@ export default function LoginPage() {
               required
               id="name"
               placeholder="Enter your username"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-4 py-2 border text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
               value={loginData.username}
               onChange={(e) =>
                 setLoginData((prev) => ({
@@ -71,7 +71,7 @@ export default function LoginPage() {
               type="password"
               id="password"
               placeholder="Enter your password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-white focus:ring-red-500"
               value={loginData.password}
               onChange={(e) =>
                 setLoginData((prev) => ({

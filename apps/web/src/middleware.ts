@@ -37,7 +37,6 @@ export async function middleware(req: NextRequest) {
     new TextEncoder().encode(process.env.SECRET_CODE)
   );
   const role = payload.role;
-  console.log(payload);
 
   if (
     (role === "CUSTOMER" && pathname.startsWith("/dashboard/customer")) ||
@@ -45,7 +44,11 @@ export async function middleware(req: NextRequest) {
   ) {
     return NextResponse.next();
   } else if (role === "CUSTOMER" && pathname.startsWith("/dashboard")) {
-    return;
+    return NextResponse.redirect(`${req.nextUrl.origin}/dashboard/customer`);
+  } else if (role === "ORGANIZER" && pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(
+      `${req.nextUrl.origin}/dashboard/event-organizer`
+    );
   } else {
     return new NextResponse("Forbidden", { status: 403 });
   }
