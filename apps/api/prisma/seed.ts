@@ -286,6 +286,10 @@ async function seeds() {
   try {
     await prisma.category.deleteMany();
 
+    await prisma.image.deleteMany();
+
+    await prisma.ticket.deleteMany();
+
     await prisma.review.deleteMany();
 
     await prisma.coupon.deleteMany();

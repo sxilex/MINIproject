@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
+import Link from "next/link";
 import RotatingText from "../../../Reactbits/RotatingText";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
@@ -84,7 +85,7 @@ export default function EventWithPagination() {
 
   return (
     <main className="pt-[50px]  grid bg-black min-h-screen">
-      <section className="py-[30px] bg-zinc-900">
+      <section className="py-[30px] bg-zinc-900 text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-8">
             <h2 className="text-3xl font-bold text-white whitespace-nowrap">
@@ -117,9 +118,15 @@ export default function EventWithPagination() {
               onChange={(e) => setType(e.target.value)}
               className="border p-2 rounded w-full"
             >
-              <option value="">All Types</option>
-              <option value="FREE">Free</option>
-              <option value="PAID">Paid</option>
+              <option value="" className="text-slate-700">
+                All Types
+              </option>
+              <option value="FREE" className="text-slate-700">
+                Free
+              </option>
+              <option value="PAID" className="text-slate-700">
+                Paid
+              </option>
             </select>
             <input
               type="text"
@@ -179,9 +186,12 @@ export default function EventWithPagination() {
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white font-bold">{event.type}</span>
-                      <button className=" px-3 rounded-full bg-rose-600 hover:bg-rose-700 ">
+                      <Link
+                        href={`/events/${event.id}`}
+                        className=" px-3 rounded-full bg-rose-600 hover:bg-rose-700 "
+                      >
                         Buy Ticket
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

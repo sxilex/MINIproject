@@ -21,6 +21,6 @@ router
     createEvent
   );
 
-router.route("/:eventsId").get(getEventId);
+router.route("/:eventsId").get(authMiddleware, getEventId);
 
 export default router;

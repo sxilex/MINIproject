@@ -6,7 +6,7 @@ import { Plus, Search, Trash2 } from "lucide-react";
 export interface Event {
   id: string;
   title: string;
-  
+
   description: string;
   date: string;
   time: string;
@@ -29,11 +29,11 @@ export default function OrganizerDashboard() {
   const [newEvent, setNewEvent] = useState({
     title: "",
     description: "",
-    startedDate: "",
+    startedDate: new Date(),
     startedTime: "",
     location: "",
-    ticketPaymentType: "FREE", // "FREE" or "PAID"
-    quantity: "", // Only if FREE
+    ticketPaymentType: "FREE",
+    quantity: "",
     ticketTypes: {
       REGULAR: { quantity: "", price: "" },
       VIP: { quantity: "", price: "" },
@@ -51,7 +51,6 @@ export default function OrganizerDashboard() {
           throw new Error(`HTTP ${res.status}`);
         }
         const data = await res.json();
-        // Pull out the array under data.events
         setEvents(data.data);
       } catch (err) {
         console.error("Failed to load events:", err);
@@ -87,7 +86,6 @@ export default function OrganizerDashboard() {
     }
 
     try {
-      // Add ticket info based on type
       if (newEvent.ticketPaymentType === "FREE") {
         formData.append(
           "tickets",
@@ -95,7 +93,7 @@ export default function OrganizerDashboard() {
             {
               price: 0,
               quantity: parseInt(newEvent.quantity || "0"),
-              userTicketLimit: 1,
+              userTicketLimit: 10,
               ticketCategory: "REGULAR",
             },
           ])
@@ -135,7 +133,7 @@ export default function OrganizerDashboard() {
         startedDate: "",
         startedTime: "",
         ticketPaymentType: "FREE",
-        quantity: "", // only used if ticketPaymentType is FREE
+        quantity: "",
         ticketTypes: {
           REGULAR: { quantity: "", price: "" },
           VIP: { quantity: "", price: "" },
