@@ -11,6 +11,8 @@ export interface EventRequestBody {
   description: string;
   location: string;
   quota: number;
+  startedDate: Date;
+  startedTime: string;
   type: "PAID" | "FREE";
   tickets: TicketData[];
 }

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { cloudinary } from "../config/cloudinary.js";
-import { EventRequestBody } from "../types/interfaces.js";
 import fs from "fs/promises";
 
 const prisma = new PrismaClient();
@@ -57,40 +56,66 @@ export async function getEventId(req: Request, res: Response) {
 
 export async function createEvent(req: Request, res: Response): Promise<void> {
   try {
+    console.log("req.body:", req.body);
+    console.log("req.files:", req.files);
+
+    console.log("TICKET");
+
     const {
       title,
       description,
       location,
       quota,
+      startedDate,
+      startedTime,
       type,
-      tickets,
-    }: EventRequestBody = req.body;
+    } = req.body;
 
+    // Safely parse tickets JSON
+    let tickets: any[] = [];
+    try {
+      tickets = JSON.parse(req.body.tickets || "[]");
+    } catch (err) {
+      res.status(400).json({ message: "Invalid tickets format" });
+      return;
+    }
+
+    // Parse uploaded files
     const files = req.files as { [key: string]: Express.Multer.File[] };
     const userId = req.user.id;
 
-    const imageData: { url: string }[] = [];
+    let imageData: { url: string }[] = [];
 
-    for (const key in files) {
-      for (const el of files[key]) {
+    if (files && files["image"]) {
+      for (const el of files["image"]) {
         const result = await cloudinary.uploader.upload(el.path, {
           folder: "event-images-storage",
         });
 
-        if (key === "image") {
-          imageData.push({ url: result.secure_url });
-        }
+        imageData.push({ url: result.secure_url });
 
-        await fs.unlink(el.path);
+        await fs.unlink(el.path); // Remove uploaded file from server
       }
     }
 
+    // If no image uploaded, use default
+    if (imageData.length === 0) {
+      imageData = [
+        {
+          url: "https://res.cloudinary.com/dah5sxwoy/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1745306313/samples/man-portrait.jpg",
+        },
+      ];
+    }
+
+    // Create event in DB
     const newEvent = await prisma.event.create({
       data: {
         title,
         description,
         location,
-        quota,
+        quota: +quota,
+        startedDate: new Date(startedDate),
+        startedTime,
         userId,
         type,
         Image: {

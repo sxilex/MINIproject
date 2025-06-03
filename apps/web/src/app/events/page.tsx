@@ -53,7 +53,7 @@ export default function EventWithPagination() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setDebouncedTitle(title);
-      
+
       setPage(1);
       router.replace(
         `?page=1&limit=${limit}&title=${title}&type=${type}&location=${location}`,

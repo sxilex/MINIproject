@@ -8381,7 +8381,7 @@ export namespace Prisma {
   interface TicketFieldRefs {
     readonly id: FieldRef<"Ticket", 'String'>
     readonly price: FieldRef<"Ticket", 'Float'>
-    readonly quantity: FieldRef<"Ticket", 'Int'>
+    readonly quantity: FieldRef<"Ticket", 'Float'>
     readonly userTicketLimit: FieldRef<"Ticket", 'Int'>
     readonly eventId: FieldRef<"Ticket", 'String'>
     readonly ticketCategory: FieldRef<"Ticket", 'TicketCategory'>
@@ -13707,7 +13707,7 @@ export namespace Prisma {
     NOT?: TicketWhereInput | TicketWhereInput[]
     id?: StringFilter<"Ticket"> | string
     price?: FloatFilter<"Ticket"> | number
-    quantity?: IntFilter<"Ticket"> | number
+    quantity?: FloatFilter<"Ticket"> | number
     userTicketLimit?: IntFilter<"Ticket"> | number
     eventId?: StringFilter<"Ticket"> | string
     ticketCategory?: EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -13732,7 +13732,7 @@ export namespace Prisma {
     OR?: TicketWhereInput[]
     NOT?: TicketWhereInput | TicketWhereInput[]
     price?: FloatFilter<"Ticket"> | number
-    quantity?: IntFilter<"Ticket"> | number
+    quantity?: FloatFilter<"Ticket"> | number
     userTicketLimit?: IntFilter<"Ticket"> | number
     eventId?: StringFilter<"Ticket"> | string
     ticketCategory?: EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -13760,7 +13760,7 @@ export namespace Prisma {
     NOT?: TicketScalarWhereWithAggregatesInput | TicketScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Ticket"> | string
     price?: FloatWithAggregatesFilter<"Ticket"> | number
-    quantity?: IntWithAggregatesFilter<"Ticket"> | number
+    quantity?: FloatWithAggregatesFilter<"Ticket"> | number
     userTicketLimit?: IntWithAggregatesFilter<"Ticket"> | number
     eventId?: StringWithAggregatesFilter<"Ticket"> | string
     ticketCategory?: EnumTicketCategoryWithAggregatesFilter<"Ticket"> | $Enums.TicketCategory
@@ -14373,7 +14373,7 @@ export namespace Prisma {
   export type TicketUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
     Event?: EventUpdateOneRequiredWithoutTicketNestedInput
@@ -14383,7 +14383,7 @@ export namespace Prisma {
   export type TicketUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     eventId?: StringFieldUpdateOperationsInput | string
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -14402,7 +14402,7 @@ export namespace Prisma {
   export type TicketUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
   }
@@ -14410,7 +14410,7 @@ export namespace Prisma {
   export type TicketUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     eventId?: StringFieldUpdateOperationsInput | string
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -16791,7 +16791,7 @@ export namespace Prisma {
     NOT?: TicketScalarWhereInput | TicketScalarWhereInput[]
     id?: StringFilter<"Ticket"> | string
     price?: FloatFilter<"Ticket"> | number
-    quantity?: IntFilter<"Ticket"> | number
+    quantity?: FloatFilter<"Ticket"> | number
     userTicketLimit?: IntFilter<"Ticket"> | number
     eventId?: StringFilter<"Ticket"> | string
     ticketCategory?: EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -17356,7 +17356,7 @@ export namespace Prisma {
   export type TicketUpdateWithoutTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
     Event?: EventUpdateOneRequiredWithoutTicketNestedInput
@@ -17365,7 +17365,7 @@ export namespace Prisma {
   export type TicketUncheckedUpdateWithoutTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     eventId?: StringFieldUpdateOperationsInput | string
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -17743,7 +17743,7 @@ export namespace Prisma {
   export type TicketUpdateWithoutEventInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
     Transaction?: TransactionUpdateManyWithoutTicketNestedInput
@@ -17752,7 +17752,7 @@ export namespace Prisma {
   export type TicketUncheckedUpdateWithoutEventInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
     Transaction?: TransactionUncheckedUpdateManyWithoutTicketNestedInput
@@ -17761,7 +17761,7 @@ export namespace Prisma {
   export type TicketUncheckedUpdateManyWithoutEventInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
     userTicketLimit?: IntFieldUpdateOperationsInput | number
     ticketCategory?: EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
   }
