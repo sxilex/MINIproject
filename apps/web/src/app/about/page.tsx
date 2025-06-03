@@ -5,13 +5,13 @@ export default function AboutPage() {
   return (
     <main className="flex  flex-col min-h-screen">
       <section className="relative h-[40vh] w-full overflow-hidden">
-        <div className="absolute inset-0 bg-black/70 z-10">
+        <div className="absolute inset-0 bg-black/50 z-10">
           <Image
             src="/crowd-concert.jpg"
             alt="about us"
             fill
             priority
-            className="object-cover"
+            className="object-cover opacity-40"
           />
         </div>
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
@@ -19,7 +19,7 @@ export default function AboutPage() {
             {" "}
             About El Concierto
           </h1>
-          <p className="text-xl text-white/90 max-w-2xl">
+          <p className="text-xl text-white/90 max-w-2xl shadow-2xs">
             Connecting music lovers wth unforgettable live experiences since
             1885
           </p>
@@ -56,7 +56,7 @@ export default function AboutPage() {
             </div>
             <div className="w-full md:w-1/2 relative aspect-square rounded-lg overflow-hidden">
               <Image
-                src="/Bitmap2.jpg?height=800&width=800"
+                src="/maintenance.jpg?height=800&width=800"
                 alt="Our team"
                 fill
                 className="object-cover"
@@ -66,7 +66,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats */}
       <section className="py-16 bg-black">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -94,7 +93,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
       <section className="py-16 bg-zinc-900">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-white mb-12 text-center">
@@ -105,18 +103,18 @@ export default function AboutPage() {
               {
                 name: "Jepzec a.k.a Naufal",
                 role: "Founder & CEO",
-                image: "/placeholder.svg?height=400&width=400",
+                image: "/maintenance.jpg?height=400&width=400",
               },
               {
                 name: "Sxilex a.k.a uus ",
                 role: "Head of Operations",
-                image: "/placeholder.svg?height=400&width=400",
+                image: "/maintenance.jpg?height=400&width=400",
               },
             ].map((member, index) => (
               <div key={index} className="text-center">
                 <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden mb-4">
                   <Image
-                    src={member.image || "/placeholder.svg"}
+                    src={member.image || "/maintenance.jpg"}
                     alt={member.name}
                     fill
                     className="object-cover"

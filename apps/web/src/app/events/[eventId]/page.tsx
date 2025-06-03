@@ -5,8 +5,16 @@ import React, { useEffect, useState } from "react";
 interface Event {
   id: string;
   title: string;
+  type: string;
+  quota: number;
+  description: string;
+  location: string;
+  startedTime: string;
+}
+
+interface Ticket {
+  id: string;
   price: number;
-  seat: number;
 }
 
 export default function EventDetail({
@@ -27,7 +35,7 @@ export default function EventDetail({
         );
         const data = await res.json();
 
-        setEvent(data);
+        setEvent(data.data);
       } catch (error) {
         console.error(error);
       }
@@ -79,12 +87,20 @@ export default function EventDetail({
         <h2 className="text-2xl font-bold text-center">{event?.title}</h2>
         <div className="flex flex-col items-center">
           <p className="font-bold text-xl">Price</p>
-          <p>Rp. {event?.price}</p>
+          <p>Rp. {event?.type}</p>
         </div>
 
         <div className="flex flex-col items-center">
           <p className="font-bold text-xl">Seat</p>
-          <p>{event?.seat}</p>
+          <p>{event?.quota}</p>
+        </div>
+        <div className="flex flex-col items-start">
+          <p className="font-bold text-xl">Description</p>
+          <p>{event?.description}</p>
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="font-bold text-xl">Time</p>
+          <p>{event?.startedTime}</p>
         </div>
 
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -106,7 +122,7 @@ export default function EventDetail({
               className="p-4 border"
               onClick={() =>
                 setTotalTicket((prev) => {
-                  return Math.min(prev + 1, 5, event!.seat ?? 0);
+                  return Math.min(prev + 1, 5, event!.quota ?? 0);
                 })
               }
             >

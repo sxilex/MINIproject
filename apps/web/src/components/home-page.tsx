@@ -1,10 +1,9 @@
-
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroPage() {
   return (
     <section className="flex min-h-screen flex-col">
-      
       <div className="relative h-[80vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/60 z-10" />
         <Image
@@ -23,13 +22,19 @@ export default function HeroPage() {
             Discover and book tickets for the hottest concerts and music events
             happening around you.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 ">
-            <button className="bg-rose-600 hover:bg-rose-700 px-4 rounded-full">
+          <div className="flex flex-col sm:flex-row gap-4 transition-all ">
+            <Link
+              href="/events"
+              className="bg-rose-600 hover:bg-rose-700 px-4 rounded-full transition"
+            >
               Browse Events
-            </button>
-            <button className="text-white border-white hover:bg-white/10 px-4 rounded-full">
+            </Link>
+            <Link
+              href="/about"
+              className="text-white border-white hover:bg-white/10 px-4 rounded-full transition"
+            >
               Learn More
-            </button>
+            </Link>
           </div>
         </div>
       </div>
