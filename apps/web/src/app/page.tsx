@@ -3,8 +3,8 @@ import FeaturedConcerts from "@/components/featured-concert";
 
 import Newsletter from "@/components/newsletter";
 import HeroPage from "@/components/home-page";
-import UpcomingEvents from "@/components/upcoming-event";
-import EventWithPagination from "./event-with-pagination/page";
+
+
 import ClickSpark from "../../Reactbits/ClickSpark";
 
 export default function Home() {
@@ -17,12 +17,12 @@ export default function Home() {
         sparkCount={8}
         duration={400}
       >
-        {/* Your content here */}
+       
         <HeroPage />
         <FeaturedConcerts />
-        <EventWithPagination />
+
         <FeaturedPost />
-        <UpcomingEvents />
+
         <Newsletter />
       </ClickSpark>
     </main>

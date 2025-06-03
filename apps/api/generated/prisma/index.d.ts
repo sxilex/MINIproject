@@ -5391,6 +5391,8 @@ export namespace Prisma {
     location: string | null
     quota: number | null
     createdAt: Date | null
+    startedDate: Date | null
+    startedTime: string | null
     updatedAt: Date | null
     type: $Enums.Eventtype | null
     userId: string | null
@@ -5403,6 +5405,8 @@ export namespace Prisma {
     location: string | null
     quota: number | null
     createdAt: Date | null
+    startedDate: Date | null
+    startedTime: string | null
     updatedAt: Date | null
     type: $Enums.Eventtype | null
     userId: string | null
@@ -5415,6 +5419,8 @@ export namespace Prisma {
     location: number
     quota: number
     createdAt: number
+    startedDate: number
+    startedTime: number
     updatedAt: number
     type: number
     userId: number
@@ -5437,6 +5443,8 @@ export namespace Prisma {
     location?: true
     quota?: true
     createdAt?: true
+    startedDate?: true
+    startedTime?: true
     updatedAt?: true
     type?: true
     userId?: true
@@ -5449,6 +5457,8 @@ export namespace Prisma {
     location?: true
     quota?: true
     createdAt?: true
+    startedDate?: true
+    startedTime?: true
     updatedAt?: true
     type?: true
     userId?: true
@@ -5461,6 +5471,8 @@ export namespace Prisma {
     location?: true
     quota?: true
     createdAt?: true
+    startedDate?: true
+    startedTime?: true
     updatedAt?: true
     type?: true
     userId?: true
@@ -5560,6 +5572,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt: Date
+    startedDate: Date
+    startedTime: string
     updatedAt: Date
     type: $Enums.Eventtype
     userId: string
@@ -5591,6 +5605,8 @@ export namespace Prisma {
     location?: boolean
     quota?: boolean
     createdAt?: boolean
+    startedDate?: boolean
+    startedTime?: boolean
     updatedAt?: boolean
     type?: boolean
     userId?: boolean
@@ -5609,6 +5625,8 @@ export namespace Prisma {
     location?: boolean
     quota?: boolean
     createdAt?: boolean
+    startedDate?: boolean
+    startedTime?: boolean
     updatedAt?: boolean
     type?: boolean
     userId?: boolean
@@ -5622,6 +5640,8 @@ export namespace Prisma {
     location?: boolean
     quota?: boolean
     createdAt?: boolean
+    startedDate?: boolean
+    startedTime?: boolean
     updatedAt?: boolean
     type?: boolean
     userId?: boolean
@@ -5635,12 +5655,14 @@ export namespace Prisma {
     location?: boolean
     quota?: boolean
     createdAt?: boolean
+    startedDate?: boolean
+    startedTime?: boolean
     updatedAt?: boolean
     type?: boolean
     userId?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "location" | "quota" | "createdAt" | "updatedAt" | "type" | "userId", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "location" | "quota" | "createdAt" | "startedDate" | "startedTime" | "updatedAt" | "type" | "userId", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
     Review?: boolean | Event$ReviewArgs<ExtArgs>
@@ -5672,6 +5694,8 @@ export namespace Prisma {
       location: string
       quota: number
       createdAt: Date
+      startedDate: Date
+      startedTime: string
       updatedAt: Date
       type: $Enums.Eventtype
       userId: string
@@ -6109,6 +6133,8 @@ export namespace Prisma {
     readonly location: FieldRef<"Event", 'String'>
     readonly quota: FieldRef<"Event", 'Int'>
     readonly createdAt: FieldRef<"Event", 'DateTime'>
+    readonly startedDate: FieldRef<"Event", 'DateTime'>
+    readonly startedTime: FieldRef<"Event", 'String'>
     readonly updatedAt: FieldRef<"Event", 'DateTime'>
     readonly type: FieldRef<"Event", 'Eventtype'>
     readonly userId: FieldRef<"Event", 'String'>
@@ -13110,6 +13136,8 @@ export namespace Prisma {
     location: 'location',
     quota: 'quota',
     createdAt: 'createdAt',
+    startedDate: 'startedDate',
+    startedTime: 'startedTime',
     updatedAt: 'updatedAt',
     type: 'type',
     userId: 'userId'
@@ -13539,6 +13567,8 @@ export namespace Prisma {
     location?: StringFilter<"Event"> | string
     quota?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
+    startedDate?: DateTimeFilter<"Event"> | Date | string
+    startedTime?: StringFilter<"Event"> | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     type?: EnumEventtypeFilter<"Event"> | $Enums.Eventtype
     userId?: StringFilter<"Event"> | string
@@ -13556,6 +13586,8 @@ export namespace Prisma {
     location?: SortOrder
     quota?: SortOrder
     createdAt?: SortOrder
+    startedDate?: SortOrder
+    startedTime?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -13576,6 +13608,8 @@ export namespace Prisma {
     location?: StringFilter<"Event"> | string
     quota?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
+    startedDate?: DateTimeFilter<"Event"> | Date | string
+    startedTime?: StringFilter<"Event"> | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     type?: EnumEventtypeFilter<"Event"> | $Enums.Eventtype
     userId?: StringFilter<"Event"> | string
@@ -13593,6 +13627,8 @@ export namespace Prisma {
     location?: SortOrder
     quota?: SortOrder
     createdAt?: SortOrder
+    startedDate?: SortOrder
+    startedTime?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -13613,6 +13649,8 @@ export namespace Prisma {
     location?: StringWithAggregatesFilter<"Event"> | string
     quota?: IntWithAggregatesFilter<"Event"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    startedDate?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    startedTime?: StringWithAggregatesFilter<"Event"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     type?: EnumEventtypeWithAggregatesFilter<"Event"> | $Enums.Eventtype
     userId?: StringWithAggregatesFilter<"Event"> | string
@@ -14165,6 +14203,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     User: UserCreateNestedOneWithoutEventInput
@@ -14181,6 +14221,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     userId: string
@@ -14197,6 +14239,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     User?: UserUpdateOneRequiredWithoutEventNestedInput
@@ -14213,6 +14257,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     userId?: StringFieldUpdateOperationsInput | string
@@ -14229,6 +14275,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     userId: string
@@ -14241,6 +14289,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
   }
@@ -14252,6 +14302,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     userId?: StringFieldUpdateOperationsInput | string
@@ -14902,6 +14954,8 @@ export namespace Prisma {
     location?: SortOrder
     quota?: SortOrder
     createdAt?: SortOrder
+    startedDate?: SortOrder
+    startedTime?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -14918,6 +14972,8 @@ export namespace Prisma {
     location?: SortOrder
     quota?: SortOrder
     createdAt?: SortOrder
+    startedDate?: SortOrder
+    startedTime?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -14930,6 +14986,8 @@ export namespace Prisma {
     location?: SortOrder
     quota?: SortOrder
     createdAt?: SortOrder
+    startedDate?: SortOrder
+    startedTime?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -16120,6 +16178,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     Review?: ReviewCreateNestedManyWithoutEventInput
@@ -16135,6 +16195,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     Review?: ReviewUncheckedCreateNestedManyWithoutEventInput
@@ -16278,6 +16340,8 @@ export namespace Prisma {
     location?: StringFilter<"Event"> | string
     quota?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
+    startedDate?: DateTimeFilter<"Event"> | Date | string
+    startedTime?: StringFilter<"Event"> | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     type?: EnumEventtypeFilter<"Event"> | $Enums.Eventtype
     userId?: StringFilter<"Event"> | string
@@ -16790,6 +16854,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     User: UserCreateNestedOneWithoutEventInput
@@ -16805,6 +16871,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     userId: string
@@ -16836,6 +16904,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     User?: UserUpdateOneRequiredWithoutEventNestedInput
@@ -16851,6 +16921,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     userId?: StringFieldUpdateOperationsInput | string
@@ -16866,6 +16938,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     User: UserCreateNestedOneWithoutEventInput
@@ -16881,6 +16955,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     userId: string
@@ -16940,6 +17016,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     User?: UserUpdateOneRequiredWithoutEventNestedInput
@@ -16955,6 +17033,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     userId?: StringFieldUpdateOperationsInput | string
@@ -16986,6 +17066,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     User: UserCreateNestedOneWithoutEventInput
@@ -17001,6 +17083,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     userId: string
@@ -17073,6 +17157,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     User?: UserUpdateOneRequiredWithoutEventNestedInput
@@ -17088,6 +17174,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     userId?: StringFieldUpdateOperationsInput | string
@@ -17341,6 +17429,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     User: UserCreateNestedOneWithoutEventInput
@@ -17356,6 +17446,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
     userId: string
@@ -17408,6 +17500,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     User?: UserUpdateOneRequiredWithoutEventNestedInput
@@ -17423,6 +17517,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     userId?: StringFieldUpdateOperationsInput | string
@@ -17454,6 +17550,8 @@ export namespace Prisma {
     location: string
     quota: number
     createdAt?: Date | string
+    startedDate: Date | string
+    startedTime: string
     updatedAt?: Date | string
     type?: $Enums.Eventtype
   }
@@ -17525,6 +17623,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     Review?: ReviewUpdateManyWithoutEventNestedInput
@@ -17540,6 +17640,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
     Review?: ReviewUncheckedUpdateManyWithoutEventNestedInput
@@ -17555,6 +17657,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     quota?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startedTime?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventtypeFieldUpdateOperationsInput | $Enums.Eventtype
   }
